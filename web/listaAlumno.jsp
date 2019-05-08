@@ -22,6 +22,7 @@
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Edad</th>
+                <th>Acción</th>
             </tr>
             <!-- 
                 Scriplet: son inserciones de codigo java dentro un JSP    <% %>
@@ -37,6 +38,12 @@
                 <td><%= aux.getNombre()%></td>
                 <td><%= aux.getApellido()%></td>
                 <td><%= aux.getEdad()%></td>
+                <td>
+                    <form action="actualizarAlumno" method="get">
+                        <input type="hidden" name="id" value="<%= aux.getIdAlumno() %>">
+                        <button>Actualizar</button>
+                    </form>
+                </td>
             </tr>
             <%
                     }

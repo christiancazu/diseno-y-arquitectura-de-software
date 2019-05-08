@@ -131,4 +131,69 @@ public class ModelAlumno {
         }
         return alumnos;
     }
+    
+    public Alumno buscarAlumno(int id) {        
+        Alumno alumno = new Alumno();
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        
+        try {
+            conn = (Connection) MysqlDBConexion.getConexion();
+            
+            String sql =
+                    "SELECT * " +
+                    "FROM " + tbAlumno + " " +
+                    "WHERE idtbalumno = ?";
+            
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, Integer.toString(id));
+            rs = pstm.executeQuery();
+                        
+            rs.next();            
+                alumno.setIdAlumno(rs.getInt("idtbalumno"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setApellido(rs.getString("apellido"));
+                alumno.setEdad(rs.getInt("edad"));
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstm != null) {
+                    pstm.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e2) {
+            }
+        }
+        return alumno;
+    }
+    
+    public int actualizarAlumno(Alumno alumno) throws Exception {
+        Connection conn = null;
+        PreparedStatement pstm = null;
+
+        conn = (Connection) MysqlDBConexion.getConexion();
+
+        String sql =
+                "UPDATE " + tbAlumno + " " +
+                "SET nombre = ?, apellido = ?, edad = ? " +
+                "WHERE idtbalumno = ?";
+
+        pstm = conn.prepareStatement(sql);
+        pstm.setString(1, alumno.getNombre());
+        pstm.setString(2, alumno.getApellido());
+        pstm.setString(3, Integer.toString(alumno.getEdad()));
+        pstm.setString(4, Integer.toString(alumno.getIdAlumno()));
+        
+        return  pstm.executeUpdate();        
+    }
+    
 }
