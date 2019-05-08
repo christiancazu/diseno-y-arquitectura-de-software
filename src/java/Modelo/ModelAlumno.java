@@ -196,4 +196,20 @@ public class ModelAlumno {
         return  pstm.executeUpdate();        
     }
     
+    public int eliminarAlumno(int id) throws Exception {
+        Connection conn = null;
+        PreparedStatement pstm = null;
+
+        conn = (Connection) MysqlDBConexion.getConexion();
+
+        String sql =
+                "DELETE FROM " + tbAlumno + " " +
+                "WHERE idtbalumno = ?";
+
+        pstm = conn.prepareStatement(sql);
+        pstm.setString(1, Integer.toString(id));
+        
+        return  pstm.executeUpdate();        
+    }
+    
 }

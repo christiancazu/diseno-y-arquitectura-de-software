@@ -39,10 +39,14 @@
                 <td><%= aux.getApellido()%></td>
                 <td><%= aux.getEdad()%></td>
                 <td>
-                    <form action="actualizarAlumno" method="get">
+                    <form action="actualizarAlumno">
                         <input type="hidden" name="id" value="<%= aux.getIdAlumno() %>">
                         <button>Actualizar</button>
                     </form>
+                    <form action="eliminarAlumno" method="POST">
+                        <input type="hidden" name="id" value="<%= aux.getIdAlumno() %>">
+                        <button>Eliminar</button>
+                    </form>    
                 </td>
             </tr>
             <%
