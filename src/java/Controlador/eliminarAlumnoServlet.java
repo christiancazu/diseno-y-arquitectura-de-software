@@ -39,11 +39,11 @@ public class eliminarAlumnoServlet extends HttpServlet {
         
         ModelAlumno modelAlumno = new ModelAlumno();
         List<Alumno> alumnos = modelAlumno.listaAlumno();
-        
-        try {
+                
+        try {        
             modelAlumno.eliminarAlumno(id);
         } catch (Exception ex) {
-            Logger.getLogger(EliminarUsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(eliminarAlumnoServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         alumnos = modelAlumno.listaAlumno();
