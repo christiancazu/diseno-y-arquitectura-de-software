@@ -22,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Christian Carrillo Zúñiga
  */
-@WebServlet(name = "eliminarAlumnoServlet", urlPatterns = {"/eliminarAlumno"})
-public class eliminarAlumnoServlet extends HttpServlet {
+@WebServlet(name = "EliminarAlumnoServlet", urlPatterns = {"/eliminarAlumno"})
+public class EliminarAlumnoServlet extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -43,7 +43,7 @@ public class eliminarAlumnoServlet extends HttpServlet {
         try {        
             modelAlumno.eliminarAlumno(id);
         } catch (Exception ex) {
-            Logger.getLogger(eliminarAlumnoServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EliminarAlumnoServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         alumnos = modelAlumno.listaAlumno();
