@@ -1,7 +1,5 @@
 # __UTP - Diseño y Arquitectura de Software__
 
-## Proyectos del curso Diseño y Arquitectura de Software
+## WebColegioMVC-Hibernate
 
-## branchs:
-
-* __[WebColegioMVC](https://github.com/christiancazu/diseno-y-arquitectura-de-software/tree/WebColegioMVC)__
+Proyecto web con arquitectura MVC usando el ORM Hibernate.
