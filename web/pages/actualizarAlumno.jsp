@@ -1,10 +1,14 @@
 <%-- 
-Document   : registrarAlumno
-Created on : May 13, 2019, 11:51:37 AM
+Document   : actualizarAlumno
+Created on : May 13, 2019, 1:06:38 PM
 Author     : Christian Carrillo Zúñiga
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@page import="entidades.Alumno"%>
+
+<% Alumno alumno = (Alumno) request.getAttribute("alumno");%>
 
 <jsp:include page='../components/common/head.jsp'/>
 
@@ -20,13 +24,15 @@ Author     : Christian Carrillo Zúñiga
                     <h4 class="card-title text-center">Alumnos</h4>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Registrar alumno</h5>
-                    <form action="registrarAlumno" method="POST">                   
-
+                    <h5 class="card-title">Actualizar alumno: Nº<%= alumno.getId() %></h5>
+                    <form action="actualizarAlumno" method="POST">
+                        
+                        <input type="hidden" name="id" value="<%= alumno.getId() %>">
+                        
                         <jsp:include page='../components/form-group.jsp'>
                             <jsp:param name="label" value="Nombre:" />
                             <jsp:param name="name" value="nombre" />
-                            <jsp:param name="value" value="" />
+                            <jsp:param name="value" value="<%= alumno.getNombre() %>" />
                             <jsp:param name="type" value="text" />
                             <jsp:param name="placeholder" value="nombre" />
                             <jsp:param name="id" value="text-nombre" />
@@ -36,7 +42,7 @@ Author     : Christian Carrillo Zúñiga
                         <jsp:include page='../components/form-group.jsp'>
                             <jsp:param name="label" value="Apellido:" />
                             <jsp:param name="name" value="apellido" />
-                            <jsp:param name="value" value="" />
+                            <jsp:param name="value" value="<%= alumno.getApellido() %>" />
                             <jsp:param name="type" value="text" />
                             <jsp:param name="placeholder" value="apellido" />
                             <jsp:param name="id" value="text-apellido" />
@@ -46,7 +52,7 @@ Author     : Christian Carrillo Zúñiga
                         <jsp:include page='../components/form-group.jsp'>
                             <jsp:param name="label" value="Edad:" />
                             <jsp:param name="name" value="edad" />
-                            <jsp:param name="value" value="" />
+                            <jsp:param name="value" value="<%= alumno.getEdad() %>" />
                             <jsp:param name="type" value="number" />
                             <jsp:param name="placeholder" value="edad" />
                             <jsp:param name="id" value="text-edad" />
@@ -55,7 +61,7 @@ Author     : Christian Carrillo Zúñiga
 
                         <jsp:include page='../components/button-form.jsp'>
                             <jsp:param name="color" value="primary" />
-                            <jsp:param name="value" value="Registrar" />
+                            <jsp:param name="value" value="Actualizar" />
                         </jsp:include>
 
                         <a class="btn btn-block btn-md btn-outline-primary mt-2" 
@@ -99,8 +105,8 @@ Author     : Christian Carrillo Zúñiga
             
             $('#alert-message').append(
                     success === "true"
-                    ? "El alumno ha sido registrado satisfactoriamente."
-                    : "El alumno no ha podido ser registrado.")
+                    ? "El alumno ha sido actualizado satisfactoriamente."
+                    : "El alumno no ha podido ser actualizado.")
         }
     });
 </script>
