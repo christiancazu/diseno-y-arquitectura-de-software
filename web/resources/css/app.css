@@ -29,3 +29,11 @@ and open the template in the editor.
     -o-background-size: cover;
     background-size: cover;
 }
+
+.card-alumno {
+    margin-top: 64px;
+}
+
+.navbar-dark .nav-link {
+    color: whitesmoke !important;
+}
