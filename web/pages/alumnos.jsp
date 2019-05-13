@@ -50,15 +50,21 @@ Author     : Christian Carrillo Zúñiga
                         <jsp:include page='../components/form-group.jsp'>
                             <jsp:param name="name" value="text" />
                             <jsp:param name="value" value="<%= request.getAttribute("text")%>" />
-                                       <jsp:param name="type" value="text" />
-                                <jsp:param name="placeholder" value="texto a buscar" />
-                                <jsp:param name="id" value="text-filtro" />
+                            <jsp:param name="type" value="text" />
+                            <jsp:param name="placeholder" value="texto a buscar" />
+                            <jsp:param name="id" value="text-filtro" />
+                            <jsp:param name="required" value="false" />
                         </jsp:include>
 
                         <jsp:include page='../components/button-form.jsp'>
                             <jsp:param name="color" value="primary" />
                             <jsp:param name="value" value="Listar" />
                         </jsp:include>
+                        
+                        <a class="btn btn-block btn-md btn-outline-primary mt-2" 
+                            href="registrarAlumno">
+                            Registrar
+                        </a>
 
                     </form>                    
                 </div>
@@ -129,6 +135,8 @@ Author     : Christian Carrillo Zúñiga
             <jsp:include page='../components/common/foot.jsp'/>
             <script>
                 $(document).ready(function() {
+                    $('#text-filtro').removeAttr('required')
+                
                     let tipo = "<%= request.getAttribute("tipo")%>";
 
                     if (tipo == "null" || tipo == "") {

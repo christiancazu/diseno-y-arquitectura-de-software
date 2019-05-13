@@ -13,8 +13,9 @@ Author     : Christian Carrillo Zúñiga
     <input class="form-control"
         value="${param.value}"
         type="${param.type}"
-        id=${param.id}"
+        id="${param.id}"
         name="${param.name}"
         placeholder="${param.placeholder}"
+        required="${param.required}"
     >
 </div>
