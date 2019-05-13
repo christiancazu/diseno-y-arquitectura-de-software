@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Christian Carrillo Zúñiga
  */
-@WebServlet(name = "RegistrarAlumno", urlPatterns = {"/registrarAlumno"})
-public class RegistrarAlumno extends HttpServlet {
+@WebServlet(name = "RegistrarAlumnoController", urlPatterns = {"/registrarAlumno"})
+public class RegistrarAlumnoController extends HttpServlet {
 
     /**
      * Handles the HTTP <code>GET</code> method.

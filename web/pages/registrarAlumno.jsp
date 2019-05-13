@@ -21,7 +21,7 @@ Author     : Christian Carrillo Zúñiga
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Registrar alumno</h5>
-                    <form action="registrarAlumno" method="POST">                   
+                    <form action="registrarAlumno" method="POST">                       
 
                         <jsp:include page='../components/form-group.jsp'>
                             <jsp:param name="label" value="Nombre:" />
