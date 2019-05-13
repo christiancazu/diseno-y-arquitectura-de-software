@@ -5,4 +5,9 @@
 --%>
 <jsp:include page='components/common/head.jsp'/>
 
+<jsp:include page='components/common/navbar.jsp'/>
+
+<div class="img-utp-bg" 
+     style="background-image: url('<%= request.getContextPath()%>/resources/images/utp-campus.jpg')" />
+
 <jsp:include page='components/common/foot.jsp'/>

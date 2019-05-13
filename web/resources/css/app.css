@@ -1,0 +1,31 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 12, 2019, 11:03:41 PM
+    Author     : Christian Carrillo Zúñiga
+*/
+.logo-container {
+    display: flex;
+    height: 48px;
+    width: 48px;
+    background-color: white;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-logo-size {
+    max-height: 32px;
+}
+
+.img-utp-bg {
+    min-height: 100vh;
+    background: url(images/foo.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
