@@ -13,10 +13,13 @@
 <%@page import="elements.FormCheck"%>
 <%@page import="elements.FormActionButton"%>
 
-<jsp:include page='../components/common/head.jsp'/>
+<jsp:include page='../components/common/head.jsp'>
+    <jsp:param name="title" value="Alumnos" />
+</jsp:include>
 
 <jsp:include page='../components/common/navbar.jsp'>
     <jsp:param name="bgNavbar" value="bg-danger" />
+    <jsp:param name="alumnosActiveLink" value="active" />
 </jsp:include>
 
 <%

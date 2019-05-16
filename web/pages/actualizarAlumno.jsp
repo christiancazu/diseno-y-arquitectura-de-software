@@ -12,7 +12,9 @@
 <%@page import="elements.FormGroup"%>
 <%@page import="entidades.Alumno"%>
 
-<jsp:include page='../components/common/head.jsp'/>
+<jsp:include page='../components/common/head.jsp'>
+    <jsp:param name="title" value="Actualizar alumno" />
+</jsp:include>
 
 <jsp:include page='../components/common/navbar.jsp'>
     <jsp:param name="bgNavbar" value="bg-danger" />

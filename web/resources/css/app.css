@@ -34,6 +34,7 @@ and open the template in the editor.
     margin-top: 64px;
 }
 
-.navbar-dark .nav-link {
-    color: whitesmoke !important;
+/* set text-shadow on navbar links */
+.navbar-dark .navbar-nav .nav-link {
+    text-shadow: 2px 2px 4px #000;
 }

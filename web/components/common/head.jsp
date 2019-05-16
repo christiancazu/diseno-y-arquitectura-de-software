@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>WebColegioMVC</title>
+        <title>WebColegioMVC - ${param.title}</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/app.css">
