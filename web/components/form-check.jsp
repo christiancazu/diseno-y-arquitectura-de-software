@@ -7,7 +7,9 @@ Author     : Christian Carrillo Zúñiga
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div class="form-check">
-    <input class="form-check-input" type="radio" name="${param.name}"
+    <input class="form-check-input" 
+        type="radio" 
+        name="${param.name}"
         id="${param.id}"
         value="${param.value}"
     >

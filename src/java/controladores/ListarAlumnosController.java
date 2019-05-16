@@ -67,42 +67,4 @@ public class ListarAlumnosController extends HttpServlet {
         request.getRequestDispatcher("/pages/alumnos.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        String text = request.getParameter("text");
-        String filtro = request.getParameter("filtro");      
-
-        AlumnoDAO alumnoDAO = new AlumnoDAO();        
-        List<Alumno> alumnos = null;
-        
-        if (filtro.equals("todos")) {
-            alumnos = alumnoDAO.getAll();
-            text = "";
-        } else {
-            alumnos = alumnoDAO.getAllByNameSurname(text, filtro);            
-        }
-        request.setAttribute("alumnos", alumnos);
-        
-        if (alumnos != null && !alumnos.isEmpty()) {
-            request.setAttribute("result", true);            
-        } else {
-            request.setAttribute("result", false);
-        }
-        
-        request.setAttribute("text", text);
-        request.setAttribute("filtro", filtro);
-
-        request.getRequestDispatcher("/pages/alumnos.jsp").forward(request, response);
-    }
-
 }
