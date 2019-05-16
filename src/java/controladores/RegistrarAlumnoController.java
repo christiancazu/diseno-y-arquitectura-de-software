@@ -51,6 +51,7 @@ public class RegistrarAlumnoController extends HttpServlet {
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
         int edad = 0;
+        
         try {
             edad = Integer.parseInt(request.getParameter("edad"));
             

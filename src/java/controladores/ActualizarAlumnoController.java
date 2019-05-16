@@ -8,7 +8,6 @@ package controladores;
 import dao.AlumnoDAO;
 import entidades.Alumno;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,14 +32,12 @@ public class ActualizarAlumnoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        AlumnoDAO alumnoDAO = new AlumnoDAO();
-
+        
         int id = Integer.parseInt(request.getParameter("id"));
 
-        Alumno alumno = new Alumno();
-
-        alumno = alumnoDAO.getById(id);
+        AlumnoDAO alumnoDAO = new AlumnoDAO();        
+        
+        Alumno alumno = alumnoDAO.getById(id);
 
         request.setAttribute("alumno", alumno);
 
