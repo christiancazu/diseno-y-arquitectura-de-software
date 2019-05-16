@@ -1,13 +1,15 @@
 <%-- 
-Document   : registrarAlumno
-Created on : May 13, 2019, 11:51:37 AM
-Author     : Christian Carrillo Zúñiga
+    Document   : registrarAlumno
+    Created on : May 13, 2019, 11:51:37 AM
+    Author     : Christian Carrillo Zúñiga
 --%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
+
 <%@page import="elements.FormGroup"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <jsp:include page='../components/common/head.jsp'/>
 

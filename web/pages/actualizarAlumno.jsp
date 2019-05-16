@@ -1,16 +1,22 @@
 <%-- 
-Document   : actualizarAlumno
-Created on : May 13, 2019, 1:06:38 PM
-Author     : Christian Carrillo Zúñiga
+    Document   : actualizarAlumno
+    Created on : May 13, 2019, 1:06:38 PM
+    Author     : Christian Carrillo Zúñiga
 --%>
-
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
-<%@page import="elements.FormGroup"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+
+<%@page import="elements.FormGroup"%>
 <%@page import="entidades.Alumno"%>
+
+<jsp:include page='../components/common/head.jsp'/>
+
+<jsp:include page='../components/common/navbar.jsp'>
+    <jsp:param name="bgNavbar" value="bg-danger" />
+</jsp:include>
 
 <% 
     Alumno alumno = (Alumno) request.getAttribute("alumno");
@@ -27,15 +33,8 @@ Author     : Christian Carrillo Zúñiga
     formGroups.add(
             new FormGroup("Apellido:", "apellido", alumno.getApellido(), "text", "apellido", "text-apellido", true));
     formGroups.add(
-            new FormGroup("Edad:", "edad", alumno.getEdad().toString(), "number", "edad", "text-edad", true));
-    
+            new FormGroup("Edad:", "edad", alumno.getEdad().toString(), "number", "edad", "text-edad", true));   
 %>
-
-<jsp:include page='../components/common/head.jsp'/>
-
-<jsp:include page='../components/common/navbar.jsp'>
-    <jsp:param name="bgNavbar" value="bg-danger" />
-</jsp:include>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -93,7 +92,7 @@ Author     : Christian Carrillo Zúñiga
                 </button>
             </div>
         </div>
-    </div>    
+    </div>                            
 </div>
 
 <jsp:include page='../components/common/foot.jsp'/>
@@ -101,7 +100,6 @@ Author     : Christian Carrillo Zúñiga
 <script>
     $(document).ready(function() { 
         let success = "<%= request.getAttribute("success")%>"
-        console.log(success)
         if (success !== "null") {
             let $alert = $('#alert')
             $alert.alert()

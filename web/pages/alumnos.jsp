@@ -1,14 +1,15 @@
 <%-- 
-Document   : alumnos
-Created on : May 13, 2019, 12:00:55 AM
-Author     : Christian Carrillo Zúñiga
+    Document   : alumnos
+    Created on : May 13, 2019, 12:00:55 AM
+    Author     : Christian Carrillo Zúñiga
 --%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@page import="java.util.ArrayList"%>
-<%@page import="entidades.Alumno"%>
 <%@page import="java.util.List"%>
 
+<%@page import="entidades.Alumno"%>
 <%@page import="elements.FormCheck"%>
 <%@page import="elements.FormActionButton"%>
 

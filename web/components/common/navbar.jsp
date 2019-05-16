@@ -3,6 +3,7 @@
     Created on : May 12, 2019, 10:54:07 PM
     Author     : Christian Carrillo Zúñiga
 --%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <nav class="navbar navbar-expand-lg navbar-dark ${param.bgNavbar} static-top fixed-top py-0">
