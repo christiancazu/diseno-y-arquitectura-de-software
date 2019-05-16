@@ -192,20 +192,25 @@
         } else {
             $("#cbx-" + filtro).prop('checked', true)
         }
-    }
+    }   
     
     function setArgsOnEliminarAlumno() {        
         $("form").one('submit',function (e) {
-            e.preventDefault()
             
-            $form = $(this)
+            if($(this).attr("method") === "POST") {
             
-            appendIdOnForm($form)
-            appendTextOnForm($form)
-            
-            $(this).submit();
+                e.preventDefault()
+
+                $form = $(this)
+
+                appendIdOnForm($form)
+                appendTextOnForm($form)
+
+                $(this).submit();
+            }
         })   
     }
+    
     
     function appendIdOnForm (form) {
         $('<input />', {
