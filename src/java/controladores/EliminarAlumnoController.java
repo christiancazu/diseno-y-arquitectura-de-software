@@ -6,13 +6,7 @@
 package controladores;
 
 import dao.AlumnoDAO;
-import entidades.Alumno;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,19 +31,16 @@ public class EliminarAlumnoController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        String text = request.getParameter("text");
+        String filtro = request.getParameter("filtro");
         int id = Integer.parseInt(request.getParameter("id"));
 
         AlumnoDAO alumnoDAO = new AlumnoDAO();
-        List<Alumno> alumnos = null;
 
-        try {
-            alumnoDAO.delete(id);
-        } catch (Exception ex) {
-            Logger.getLogger(EliminarAlumnoController.class.getName()).log(Level.SEVERE, null, ex);
-        }     
+        alumnoDAO.delete(id);     
         
-        request.setAttribute("text", "");
-        request.getRequestDispatcher("/pages/alumnos.jsp").forward(request, response);
+        response.sendRedirect("alumnos?filtro=" + filtro + "&text=" + text);
     }
 
 }

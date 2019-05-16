@@ -94,7 +94,7 @@ Author     : Christian Carrillo Zúñiga
         List<Alumno> alumnos = (List<Alumno>) request.getAttribute("alumnos");
         if (alumnos != null && !alumnos.isEmpty()) {
     %>
-    <div class="row justify-content-center mt-4">
+    <div id="alumnos-list-container" class="row justify-content-center mt-4">
         <div class="col-md-6">
             <table class="table table-striped text-center table-hover">
                 <thead class="thead-dark">
@@ -128,7 +128,7 @@ Author     : Christian Carrillo Zúñiga
                             %>
                                                        
                             <jsp:include page="<%= formActionButtonComponent %>">
-                                <jsp:param name="action" value="<%= formActionButton.getAction() %>" />
+                                <jsp:param name="action" value="<%= formActionButton.getAction()%>" />
                                 <jsp:param name="method" value="<%= formActionButton.getMethod()%>" />
                                 <jsp:param name="value" value="<%= alumno.getId()%>" />
                                 <jsp:param name="btnType" value="<%= formActionButton.getBtnType()%>" />
@@ -175,10 +175,48 @@ Author     : Christian Carrillo Zúñiga
 
         let filtro = "<%= request.getAttribute("filtro")%>"
 
+        setCheckboxSelected(filtro)
+        
+        if($('#alumnos-list-container').length) {
+            setArgsOnEliminarAlumno()
+        } 
+    })
+    
+    function setCheckboxSelected(filtro) {
         if (filtro === "null" || "") {
             $("#cbx-todos").prop('checked', true)
         } else {
             $("#cbx-" + filtro).prop('checked', true)
         }
-    })
+    }
+    
+    function setArgsOnEliminarAlumno() {        
+        $("form").one('submit',function (e) {
+            e.preventDefault()
+            
+            $form = $(this)
+            
+            appendIdOnForm($form)
+            appendTextOnForm($form)
+            
+            $(this).submit();
+        })   
+    }
+    
+    function appendIdOnForm (form) {
+        $('<input />', {
+            type: 'hidden',
+            name: 'text',
+            value: $('#text-filtro').val()
+        }).appendTo(form);
+    }
+    
+    function appendTextOnForm (form) {
+        $('<input />', {
+            type: 'hidden',
+            name: 'filtro',
+            value: $('input[name="filtro"]:checked').val()         
+        }).appendTo(form);
+    }
+    
 </script>
