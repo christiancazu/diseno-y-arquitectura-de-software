@@ -4,11 +4,32 @@ Created on : May 13, 2019, 1:06:38 PM
 Author     : Christian Carrillo Zúñiga
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="elements.FormGroup"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@page import="entidades.Alumno"%>
 
-<% Alumno alumno = (Alumno) request.getAttribute("alumno");%>
+<% 
+    Alumno alumno = (Alumno) request.getAttribute("alumno");
+    
+    // components patchs
+    String formGroupComponent = "../components/form-group.jsp";
+    String buttonFormComponent = "../components/button-form.jsp";
+    
+    // context for formGroups components
+    List<FormGroup> formGroups = new ArrayList();
+
+    formGroups.add(
+            new FormGroup("Nombre:", "nombre", alumno.getNombre(), "text", "nombre", "text-nombre", true));
+    formGroups.add(
+            new FormGroup("Apellido:", "apellido", alumno.getApellido(), "text", "apellido", "text-apellido", true));
+    formGroups.add(
+            new FormGroup("Edad:", "edad", alumno.getEdad().toString(), "number", "edad", "text-edad", true));
+    
+%>
 
 <jsp:include page='../components/common/head.jsp'/>
 
@@ -24,42 +45,30 @@ Author     : Christian Carrillo Zúñiga
                     <h4 class="card-title text-center">Alumnos</h4>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Actualizar alumno: Nº<%= alumno.getId() %></h5>
+                    <h5 class="card-title">Actualizar alumno: Nº <%= alumno.getId() %></h5>
                     <form action="actualizarAlumno" method="POST">
                         
                         <input type="hidden" name="id" value="<%= alumno.getId() %>">
+                        <%-- formGroups --%>
+                        <%
+                            for (FormGroup formGroup : formGroups) {                                      
+                        %>
                         
-                        <jsp:include page='../components/form-group.jsp'>
-                            <jsp:param name="label" value="Nombre:" />
-                            <jsp:param name="name" value="nombre" />
-                            <jsp:param name="value" value="<%= alumno.getNombre() %>" />
-                            <jsp:param name="type" value="text" />
-                            <jsp:param name="placeholder" value="nombre" />
-                            <jsp:param name="id" value="text-nombre" />
-                            <jsp:param name="required" value="true" />
+                        <jsp:include page="<%= formGroupComponent %>">
+                            <jsp:param name="label" value="<%= formGroup.getLabel()%>" />
+                            <jsp:param name="name" value="<%= formGroup.getName()%>" />
+                            <jsp:param name="value" value="<%= formGroup.getValue()%>" />
+                            <jsp:param name="type" value="<%= formGroup.getType()%>" />
+                            <jsp:param name="placeholder" value="<%= formGroup.getPlaceholder()%>" />
+                            <jsp:param name="id" value="<%= formGroup.getId()%>" />
+                            <jsp:param name="required" value="<%= formGroup.isRequired()%>" />
                         </jsp:include>
+                        
+                        <%
+                            }
+                        %> 
 
-                        <jsp:include page='../components/form-group.jsp'>
-                            <jsp:param name="label" value="Apellido:" />
-                            <jsp:param name="name" value="apellido" />
-                            <jsp:param name="value" value="<%= alumno.getApellido() %>" />
-                            <jsp:param name="type" value="text" />
-                            <jsp:param name="placeholder" value="apellido" />
-                            <jsp:param name="id" value="text-apellido" />
-                            <jsp:param name="required" value="true" />
-                        </jsp:include>
-
-                        <jsp:include page='../components/form-group.jsp'>
-                            <jsp:param name="label" value="Edad:" />
-                            <jsp:param name="name" value="edad" />
-                            <jsp:param name="value" value="<%= alumno.getEdad() %>" />
-                            <jsp:param name="type" value="number" />
-                            <jsp:param name="placeholder" value="edad" />
-                            <jsp:param name="id" value="text-edad" />
-                            <jsp:param name="required" value="true" />
-                        </jsp:include>
-
-                        <jsp:include page='../components/button-form.jsp'>
+                        <jsp:include page="<%= buttonFormComponent %>">
                             <jsp:param name="color" value="primary" />
                             <jsp:param name="value" value="Actualizar" />
                         </jsp:include>
