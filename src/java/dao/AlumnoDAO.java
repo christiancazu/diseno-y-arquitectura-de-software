@@ -69,12 +69,12 @@ public class AlumnoDAO implements IAlumnoDAO {
     }
 
     @Override
-    public List<Alumno> getAllByNameSurname(String cadena, String tipo) {
+    public List<Alumno> getAllByNameSurname(String text, String filtro) {
         List<Alumno> alumnos = null;
         Query query = null;
 
         try {
-            if (tipo.equalsIgnoreCase("porNombres")) { //filtra por nombres            
+            if (filtro.equalsIgnoreCase("nombres")) { //filtra por nombres            
                 query = session.createQuery(
                         "from Alumno "
                         + "where nombre like ?");
@@ -83,7 +83,7 @@ public class AlumnoDAO implements IAlumnoDAO {
                         "from Alumno "
                         + "where apellido like ?");
             }
-            query.setParameter(0, "%" + cadena + "%");
+            query.setParameter(0, "%" + text + "%");
             alumnos = (List<Alumno>) query.list();
             tx.commit();
         } catch (HibernateException e) {

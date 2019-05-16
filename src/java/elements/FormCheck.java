@@ -9,13 +9,13 @@ package elements;
  *
  * @author christian
  */
-public class Checkbox {
+public class FormCheck {
     String value;
     String id;
     String label;
     String name;
 
-    public Checkbox(String value, String id, String label, String name) {
+    public FormCheck(String value, String id, String label, String name) {
         this.value = value;
         this.id = id;
         this.label = label;

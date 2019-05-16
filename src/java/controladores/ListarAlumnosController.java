@@ -36,7 +36,34 @@ public class ListarAlumnosController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        request.setAttribute("text", "");
+        String text = request.getParameter("text");
+        String filtro = request.getParameter("filtro");
+
+        if(filtro == null){
+            request.setAttribute("text", "");
+            request.getRequestDispatcher("/pages/alumnos.jsp").forward(request, response);
+        }
+        
+        AlumnoDAO alumnoDAO = new AlumnoDAO();        
+        List<Alumno> alumnos = null;
+        
+        if (filtro.equals("todos")) {
+            alumnos = alumnoDAO.getAll();
+            text = "";
+        } else {
+            alumnos = alumnoDAO.getAllByNameSurname(text, filtro);            
+        }
+        request.setAttribute("alumnos", alumnos);
+        
+        if (alumnos != null && !alumnos.isEmpty()) {
+            request.setAttribute("result", true);            
+        } else {
+            request.setAttribute("result", false);
+        }
+
+        request.setAttribute("text", text);
+        request.setAttribute("filtro", filtro);
+
         request.getRequestDispatcher("/pages/alumnos.jsp").forward(request, response);
     }
 
@@ -52,17 +79,17 @@ public class ListarAlumnosController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String cadena = request.getParameter("text");
-        String tipo = request.getParameter("tipoListado");      
+        String text = request.getParameter("text");
+        String filtro = request.getParameter("filtro");      
 
         AlumnoDAO alumnoDAO = new AlumnoDAO();        
         List<Alumno> alumnos = null;
         
-        if (tipo.equals("porTodos")) {
+        if (filtro.equals("todos")) {
             alumnos = alumnoDAO.getAll();
-            cadena = "";
+            text = "";
         } else {
-            alumnos = alumnoDAO.getAllByNameSurname(cadena, tipo);            
+            alumnos = alumnoDAO.getAllByNameSurname(text, filtro);            
         }
         request.setAttribute("alumnos", alumnos);
         
@@ -72,8 +99,8 @@ public class ListarAlumnosController extends HttpServlet {
             request.setAttribute("result", false);
         }
         
-        request.setAttribute("text", cadena);
-        request.setAttribute("tipo", tipo);
+        request.setAttribute("text", text);
+        request.setAttribute("filtro", filtro);
 
         request.getRequestDispatcher("/pages/alumnos.jsp").forward(request, response);
     }

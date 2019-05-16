@@ -5,14 +5,33 @@ Author     : Christian Carrillo Zúñiga
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="entidades.Alumno"%>
 <%@page import="java.util.List"%>
+
+<%@page import="elements.FormCheck"%>
+<%@page import="elements.FormActionButton"%>
 
 <jsp:include page='../components/common/head.jsp'/>
 
 <jsp:include page='../components/common/navbar.jsp'>
     <jsp:param name="bgNavbar" value="bg-danger" />
 </jsp:include>
+
+<%
+    // components patchs
+    String formCheckComponent = "../components/form-check.jsp";
+    String formGroupComponent = "../components/form-group.jsp";
+    String buttonFormComponent = "../components/button-form.jsp";
+    String formActionButtonComponent = "../components/form-action-button.jsp";
+    
+    // context for formChecks components
+    List<FormCheck> formChecks = new ArrayList();
+        
+    formChecks.add(new FormCheck("nombres", "cbx-nombres", "Nombres", "filtro"));
+    formChecks.add(new FormCheck("apellidos", "cbx-apellidos", "Apellidos", "filtro"));
+    formChecks.add(new FormCheck("todos", "cbx-todos", "Todos", "filtro"));
+%>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -24,30 +43,26 @@ Author     : Christian Carrillo Zúñiga
                 <div class="card-body">
                     <h5 class="card-title">Consultar alumnos</h5>
                     <p class="card-text">Listar por:</p>
-                    <form action="alumnos" method="POST">                   
-
-                        <jsp:include page='../components/form-check.jsp'>
-                            <jsp:param name="value" value="porNombres" />
-                            <jsp:param name="id" value="porNombres" />
-                            <jsp:param name="label" value="nombres" />
-                            <jsp:param name="name" value="tipoListado" />
+                    <form action="alumnos" method="GET">                   
+                        
+                        <%-- formChecks --%>
+                        <%
+                            for (FormCheck formCheck : formChecks) {                                      
+                        %>
+                        
+                        <jsp:include page="<%= formCheckComponent %>">
+                            <jsp:param name="value" value="<%= formCheck.getValue() %>" />
+                            <jsp:param name="id" value="<%= formCheck.getId()%>" />
+                            <jsp:param name="label" value="<%= formCheck.getLabel()%>" />
+                            <jsp:param name="name" value="<%= formCheck.getName()%>" />
                         </jsp:include>
+                        
+                        <%
+                            }
+                        %>
 
-                        <jsp:include page='../components/form-check.jsp'>
-                            <jsp:param name="value" value="porApellidos" />
-                            <jsp:param name="id" value="porApellidos" />
-                            <jsp:param name="label" value="apellidos" />
-                            <jsp:param name="name" value="tipoListado" />
-                        </jsp:include>
-
-                        <jsp:include page='../components/form-check.jsp'>
-                            <jsp:param name="value" value="porTodos" />
-                            <jsp:param name="id" value="porTodos" />
-                            <jsp:param name="label" value="todos" />
-                            <jsp:param name="name" value="tipoListado" />                            
-                        </jsp:include>
-
-                        <jsp:include page='../components/form-group.jsp'>
+                        <%-- form-group label+input --%>
+                        <jsp:include page="<%= formGroupComponent %>">
                             <jsp:param name="name" value="text" />
                             <jsp:param name="value" value="<%= request.getAttribute("text")%>" />
                             <jsp:param name="type" value="text" />
@@ -56,13 +71,16 @@ Author     : Christian Carrillo Zúñiga
                             <jsp:param name="required" value="false" />
                         </jsp:include>
 
-                        <jsp:include page='../components/button-form.jsp'>
+                        <%-- button Listar --%>
+                        <jsp:include page="<%= buttonFormComponent %>">
                             <jsp:param name="color" value="primary" />
                             <jsp:param name="value" value="Listar" />
                         </jsp:include>
                         
+                        <%-- button Registrar --%>
                         <a class="btn btn-block btn-md btn-outline-primary mt-2" 
-                            href="registrarAlumno">
+                            href="registrarAlumno"
+                        >
                             Registrar
                         </a>
 
@@ -73,76 +91,94 @@ Author     : Christian Carrillo Zúñiga
     </div>
 
     <%
-    List<Alumno> alumnos = (List<Alumno>) request.getAttribute("alumnos");
-            if ((alumnos != null) && !alumnos.isEmpty()) {
-            %>
-            <div class="row justify-content-center mt-4">
-                <div class="col-md-8">
-                    <table class="table table-striped text-center table-hover">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Id</th>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Edad</th>
-                                <th class="text-center">Acción</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+        List<Alumno> alumnos = (List<Alumno>) request.getAttribute("alumnos");
+        if (alumnos != null && !alumnos.isEmpty()) {
+    %>
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-6">
+            <table class="table table-striped text-center table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Edad</th>
+                        <th class="text-center">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <%
+                    List<FormActionButton> formActionButtons = new ArrayList();
+                    formActionButtons.add(new FormActionButton(
+                            "actualizarAlumno", "GET", "", "success", "Actualizar"));
+                    formActionButtons.add(new FormActionButton(
+                            "eliminarAlumno", "POST", "", "danger", "Eliminar"));
+                    
+                    for (Alumno alumno : alumnos) {
+                %>
+                    <tr> 
+                        <td><%= alumno.getId()%></td>
+                        <td><%= alumno.getNombre()%></td>
+                        <td><%= alumno.getApellido()%></td>
+                        <td><%= alumno.getEdad()%></td>
+                        <td class="d-flex justify-content-center">
+                            
                             <%
-                            for (Alumno a : alumnos) {
+                                for (FormActionButton formActionButton : formActionButtons) {      
                             %>
-                            <tr> 
-                                <td><%= a.getId()%></td>
-                                <td><%= a.getNombre()%></td>
-                                <td><%= a.getApellido()%></td>
-                                <td><%= a.getEdad()%></td>
-                                <td class="d-flex justify-content-center">
-                                    <form action="actualizarAlumno">
-                                        <input type="hidden" name="id" value="<%= a.getId()%>">
-                                        <button class="btn btn-success mx-2">
-                                            Actualizar
-                                        </button>
-                                    </form>
-                                    <form action="eliminarAlumno" method="POST">
-                                        <input type="hidden" name="id" value="<%= a.getId()%>">
-                                        <button class="btn btn-danger mx-2">
-                                            Eliminar
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
+                                                       
+                            <jsp:include page="<%= formActionButtonComponent %>">
+                                <jsp:param name="action" value="<%= formActionButton.getAction() %>" />
+                                <jsp:param name="method" value="<%= formActionButton.getMethod()%>" />
+                                <jsp:param name="value" value="<%= alumno.getId()%>" />
+                                <jsp:param name="btnType" value="<%= formActionButton.getBtnType()%>" />
+                                <jsp:param name="btnName" value="<%= formActionButton.getBtnName()%>" />
+                            </jsp:include>
                             <%
-                            }
-                            }
-                            Boolean result = (Boolean) request.getAttribute("result");
-                            if (result != null && !result) {
+                                }                  
                             %>
-                        <div class="row justify-content-center mt-4">
-                            <div class="alert alert-warning col-md-8" role="alert">
-                                La busqueda no produjo resultados
-                            </div>
-                        </div>
-                        <%
-                        }
-                        %>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            </div>
-
-            <jsp:include page='../components/common/foot.jsp'/>
-            <script>
-                $(document).ready(function() {
-                    $('#text-filtro').removeAttr('required')
-                
-                    let tipo = "<%= request.getAttribute("tipo")%>";
-
-                    if (tipo == "null" || tipo == "") {
-                        $("#porTodos").prop('checked', true);
-                    } else {
-                        $("#" + tipo).prop('checked', true);
+  
+                        </td>
+                    </tr>
+                <%
                     }
-                });
-            </script>
+                %>                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <% 
+        } 
+    %>
+    
+    <%        
+        if (request.getAttribute("result") != null && !(Boolean)request.getAttribute("result")) {
+    %>    
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-6">
+            <div class="alert alert-warning" role="alert">
+                La busqueda no produjo resultados
+            </div>
+        </div>
+    </div>
+    <%
+        }
+    %>
+
+</div>
+
+<jsp:include page='../components/common/foot.jsp'/>
+
+<script>
+    $(document).ready(() => {
+        $('#text-filtro').removeAttr('required')
+
+        let filtro = "<%= request.getAttribute("filtro")%>"
+
+        if (filtro === "null" || "") {
+            $("#cbx-todos").prop('checked', true)
+        } else {
+            $("#cbx-" + filtro).prop('checked', true)
+        }
+    })
+</script>
