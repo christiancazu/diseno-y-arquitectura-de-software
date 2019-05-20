@@ -25,6 +25,7 @@
     
     component.put("formGroup", "../components/form-group.jsp");
     component.put("buttonForm", "../components/button-form.jsp");
+    component.put("buttonBack", "../components/button-back.jsp");
     
     // setting component attribute as pageContext
     request.setAttribute("component", component);
@@ -74,10 +75,9 @@
                         </jsp:include>
 
                         <%-- button Volver --%>
-                        <a class="btn btn-block btn-md btn-outline-primary mt-2" 
-                            href="<%= request.getContextPath()%>/alumnos">
-                            Volver
-                        </a>
+                        <jsp:include page="${component.buttonBack}">
+                            <jsp:param name="path" value="/alumnos" />
+                        </jsp:include>    
 
                     </form>                    
                 </div>
