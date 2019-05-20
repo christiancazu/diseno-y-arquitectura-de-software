@@ -1,13 +1,13 @@
 <%-- 
     Document   : actualizarAlumno
     Created on : May 13, 2019, 1:06:38 PM
-    Author     : Christian Carrillo ZÃºÃ±iga
+    Author     : Christian Carrillo Zúñiga
 --%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
+<%@page import="java.util.HashMap"%>
 
 <%@page import="elements.FormGroup"%>
 <%@page import="entidades.Alumno"%>
@@ -21,12 +21,18 @@
 </jsp:include>
 
 <% 
+    // components paths
+    HashMap<String, String> component = new HashMap();
+    
+    component.put("formGroup", "../components/form-group.jsp");
+    component.put("buttonForm", "../components/button-form.jsp");
+    
+    // setting component attribute as pageContext
+    request.setAttribute("component", component);
+    
+    // get alumno to be set on formGroups inputs
     Alumno alumno = (Alumno) request.getAttribute("alumno");
-    
-    // components patchs
-    String formGroupComponent = "../components/form-group.jsp";
-    String buttonFormComponent = "../components/button-form.jsp";
-    
+ 
     // context for formGroups components
     List<FormGroup> formGroups = new ArrayList();
 
@@ -36,6 +42,9 @@
             new FormGroup("Apellido:", "apellido", alumno.getApellido(), "text", "apellido", "text-apellido", true));
     formGroups.add(
             new FormGroup("Edad:", "edad", alumno.getEdad().toString(), "number", "edad", "text-edad", true));   
+
+    // setting formGroups attribute as pageContext
+    request.setAttribute("formGroups", formGroups);
 %>
 
 <div class="container">
@@ -46,34 +55,31 @@
                     <h4 class="card-title text-center">Alumnos</h4>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Actualizar alumno: NÂº <%= alumno.getId() %></h5>
+                    <h5 class="card-title">Actualizar alumno: Nº ${alumno.id}</h5>
                     <form action="actualizarAlumno" method="POST">
                         
-                        <input type="hidden" name="id" value="<%= alumno.getId() %>">
-                        <%-- formGroups --%>
-                        <%
-                            for (FormGroup formGroup : formGroups) {                                      
-                        %>
+                        <input type="hidden" name="id" value="${alumno.id}">
                         
-                        <jsp:include page="<%= formGroupComponent %>">
-                            <jsp:param name="label" value="<%= formGroup.getLabel()%>" />
-                            <jsp:param name="name" value="<%= formGroup.getName()%>" />
-                            <jsp:param name="value" value="<%= formGroup.getValue()%>" />
-                            <jsp:param name="type" value="<%= formGroup.getType()%>" />
-                            <jsp:param name="placeholder" value="<%= formGroup.getPlaceholder()%>" />
-                            <jsp:param name="id" value="<%= formGroup.getId()%>" />
-                            <jsp:param name="required" value="<%= formGroup.isRequired()%>" />
-                        </jsp:include>
-                        
-                        <%
-                            }
-                        %> 
+                        <%-- formGroups --%>                        
+                        <c:forEach var="formGroup" items="${formGroups}"> 
+                            <jsp:include page="${component.formGroup}">
+                                <jsp:param name="label" value="${formGroup.label}" />
+                                <jsp:param name="name" value="${formGroup.getName()}" />
+                                <jsp:param name="value" value="${formGroup.getValue()}" />
+                                <jsp:param name="type" value="${formGroup.getType()}" />
+                                <jsp:param name="placeholder" value="${formGroup.getPlaceholder()}" />
+                                <jsp:param name="id" value="${formGroup.getId()}" />
+                                <jsp:param name="required" value="${formGroup.isRequired()}" />
+                            </jsp:include>
+                        </c:forEach>
 
-                        <jsp:include page="<%= buttonFormComponent %>">
+                        <%-- button Actualizar --%>
+                        <jsp:include page="${component.buttonForm}">
                             <jsp:param name="color" value="primary" />
                             <jsp:param name="value" value="Actualizar" />
                         </jsp:include>
 
+                        <%-- button Volver --%>
                         <a class="btn btn-block btn-md btn-outline-primary mt-2" 
                             href="<%= request.getContextPath()%>/alumnos">
                             Volver
@@ -103,7 +109,7 @@
     $(document).ready(function() { 
         let success = "<%= request.getAttribute("success")%>"
         if (success !== "null") {
-            let $alert = $('#alert')
+            $alert = $('#alert')
             $alert.alert()
             $alert.removeClass('d-none')
             $alert.addClass(
