@@ -6,8 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<a class="btn btn-block btn-md btn-outline-primary mt-2" 
+<a class="btn btn-block btn-md btn-${param.btnColor} mt-2" 
     href="<%= request.getContextPath()%>/${param.path}"
 >
-    <strong>Volver</strong>
+    <strong>${param.btnName}</strong>
 </a>
