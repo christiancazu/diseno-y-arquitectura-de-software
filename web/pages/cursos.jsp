@@ -78,9 +78,9 @@
                             // context for formActionButtons components
                             List<FormActionButton> formActionButtons = new ArrayList();
                             formActionButtons.add(new FormActionButton(
-                                    "actualizarAlumno", "GET", "", "success", "Actualizar"));
+                                    "actualizarCurso", "GET", "", "success", "Actualizar"));
                             formActionButtons.add(new FormActionButton(
-                                    "eliminarAlumno", "POST", "", "danger", "Eliminar"));
+                                    "eliminarCurso", "POST", "", "danger", "Eliminar"));
 
                             // setting formActionButtons attribute as pageContext
                             request.setAttribute("formActionButtons", formActionButtons);
