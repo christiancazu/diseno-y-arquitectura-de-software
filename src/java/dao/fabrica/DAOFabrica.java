@@ -1,4 +1,6 @@
-package dao;
+package dao.fabrica;
+
+import dao.ICursoDAO;
 
 /**
  *

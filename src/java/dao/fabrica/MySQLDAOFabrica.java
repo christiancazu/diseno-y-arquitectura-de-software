@@ -1,4 +1,7 @@
-package dao;
+package dao.fabrica;
+
+import dao.impl.MySQLCursoDAO;
+import dao.fabrica.DAOFabrica;
 
 /**
  *

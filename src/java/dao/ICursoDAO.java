@@ -7,9 +7,21 @@ import java.util.List;
  *
  * @author Christian Carrillo Zúñiga
  */
-public interface ICursoDAO {
-  
-    public List<Curso> listarCursos();
+public interface ICursoDAO extends IGenericDAO<Curso>{
+
+    @Override
+    public int eliminar(int id);
+
+    @Override
+    public int actualizar(Curso entity);
+
+    @Override
+    public int crear(Curso entity);
+
+    @Override
+    public List<Curso> getAll();
+
+    @Override
+    public Curso getById(int id);
     
-    public int insertarCurso(Curso curso);
 }

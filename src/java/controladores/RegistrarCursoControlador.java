@@ -1,6 +1,6 @@
 package controladores;
 
-import dao.DAOFabrica;
+import dao.fabrica.DAOFabrica;
 import dao.ICursoDAO;
 import entidades.Curso;
 import java.io.IOException;
@@ -57,7 +57,7 @@ public class RegistrarCursoControlador extends HttpServlet {
             DAOFabrica subFabrica = DAOFabrica.getDAOFabrica(DAOFabrica.MYSQL);
             ICursoDAO dao = subFabrica.getCursoDAO();
 
-            request.setAttribute("success", dao.insertarCurso(curso) != -1);
+            request.setAttribute("success", dao.crear(curso) != -1);
         } catch (Exception e) {
             request.setAttribute("success", false);
         } 

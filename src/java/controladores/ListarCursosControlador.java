@@ -1,6 +1,6 @@
 package controladores;
 
-import dao.DAOFabrica;
+import dao.fabrica.DAOFabrica;
 import dao.ICursoDAO;
 import entidades.Curso;
 import java.io.IOException;
@@ -33,7 +33,7 @@ public class ListarCursosControlador extends HttpServlet {
         DAOFabrica subFabrica = DAOFabrica.getDAOFabrica(DAOFabrica.MYSQL);
         ICursoDAO dao = subFabrica.getCursoDAO();
 
-        List<Curso> cursos = dao.listarCursos();
+        List<Curso> cursos = dao.getAll();
         request.setAttribute("cursos", cursos);
         request.getRequestDispatcher("/pages/cursos.jsp").forward(request, response);
     } 

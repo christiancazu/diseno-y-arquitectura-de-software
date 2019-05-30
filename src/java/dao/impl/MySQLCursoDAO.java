@@ -1,5 +1,6 @@
-package dao;
+package dao.impl;
 
+import dao.ICursoDAO;
 import utils.MySQLDBConexion;
 import entidades.Curso;
 import java.sql.Connection;
@@ -18,7 +19,7 @@ public class MySQLCursoDAO implements ICursoDAO {
     private final String CURSO = "curso";
 
     @Override
-    public List<Curso> listarCursos() {
+    public List<Curso> getAll() {
         List<Curso> cursos = new ArrayList<>();
 
         Connection conn = null;
@@ -61,7 +62,7 @@ public class MySQLCursoDAO implements ICursoDAO {
     }
 
     @Override
-    public int insertarCurso(Curso curso) {
+    public int crear(Curso curso) {
         int salida = -1;
 
         Connection conn = null;
@@ -92,5 +93,20 @@ public class MySQLCursoDAO implements ICursoDAO {
             }
         }
         return salida;
+    }
+
+    @Override
+    public int eliminar(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int actualizar(Curso entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public Curso getById(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
