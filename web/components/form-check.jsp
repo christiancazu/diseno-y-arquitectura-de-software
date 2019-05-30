@@ -3,7 +3,6 @@
     Created on : May 13, 2019, 1:00:09 AM
     Author     : Christian Carrillo Zúñiga
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div class="form-check">
