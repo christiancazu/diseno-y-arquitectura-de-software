@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `colegio` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `colegio`;
+CREATE DATABASE  IF NOT EXISTS `instituto` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `instituto`;
 -- MySQL dump 10.13  Distrib 5.6.24, for Win64 (x86_64)
 --
--- Host: localhost    Database: colegio
+-- Host: localhost    Database: instituto
 -- ------------------------------------------------------
 -- Server version	5.6.26-log
 
@@ -65,18 +65,18 @@ CREATE TABLE `alumno` (
 
 LOCK TABLES `alumno` WRITE;
 /*!40000 ALTER TABLE `alumno` DISABLE KEYS */;
-INSERT INTO `alumno` VALUES (1,'Luciana','Carpio',18),(2,'Carlos','Segovia',25),(3,'Luis','Garcia',21),(4,'Roxana','Zevallos',31);
+INSERT INTO `alumno` VALUES (1,'Luciana','Carpio',18),(2,'Carlos','Segovia',25),(7,'Luis','Garcia',21),(8,'Roxana','Zevallos',31);
 /*!40000 ALTER TABLE `alumno` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `administrativo`
+-- Table structure for table `empleado`
 --
 
-DROP TABLE IF EXISTS `administrativo`;
+DROP TABLE IF EXISTS `empleado`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `administrativo` (
+CREATE TABLE `empleado` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) DEFAULT NULL,
   `apellido` varchar(30) DEFAULT NULL,
@@ -87,13 +87,13 @@ CREATE TABLE `administrativo` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `administrativo`
+-- Dumping data for table `empleado`
 --
 
-LOCK TABLES `administrativo` WRITE;
-/*!40000 ALTER TABLE `administrativo` DISABLE KEYS */;
-INSERT INTO `administrativo` VALUES (1,'Carlos','Macedo','cmacedo','123456'),(2,'Luis','Carpio','lcarpio','654321'),(3,'Arturo','Delgado','adelgado','12345');
-/*!40000 ALTER TABLE `administrativo` ENABLE KEYS */;
+LOCK TABLES `empleado` WRITE;
+/*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
+INSERT INTO `empleado` VALUES (1,'Carlos','Macedo','cmacedo','123456'),(2,'Luis','Carpio','lcarpio','654321'),(7,'Arturo','Delgado','adelgado','12345');
+/*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
