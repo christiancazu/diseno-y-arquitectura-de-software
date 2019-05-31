@@ -11,9 +11,11 @@
 <%@attribute name="navbarBgColor" %>
 <%@attribute name="navbarActiveLink" %>
 <%@attribute name="pageTitle" %>
+<%@attribute name="bgBody" %>
 
 <jsp:include page='/WEB-INF/components/common/head.jsp'>
     <jsp:param name="pageTitle" value="${pageTitle}" />
+    <jsp:param name="bgBody" value="${bgBody}" />
 </jsp:include>
 
 <jsp:include page='/WEB-INF/components/common/navbar.jsp'>

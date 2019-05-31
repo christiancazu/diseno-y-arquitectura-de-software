@@ -34,3 +34,9 @@
 .navbar-dark .navbar-nav .nav-link {
     text-shadow: 2px 2px 4px #000;
 }
+
+.card-login {
+    background-color: rgba(0, 0, 0, .5) !important;
+    color: white;
+    margin-top: 96px;
+}
