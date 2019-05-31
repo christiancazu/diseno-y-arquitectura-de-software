@@ -14,7 +14,7 @@
     links.put("inicio", request.getContextPath());
     links.put("alumnos", "alumnos");
     links.put("cursos", "cursos");
-    links.put("administradores", "administradores");
+    links.put("empleados", "empleados");
     
     request.setAttribute("links", links);
 %>

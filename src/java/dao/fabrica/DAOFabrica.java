@@ -2,6 +2,7 @@ package dao.fabrica;
 
 import dao.ICursoDAO;
 import dao.IAlumnoDAO;
+import dao.IEmpleadoDAO;
 
 /**
  *
@@ -18,6 +19,7 @@ public abstract class DAOFabrica {
     // The concrete factories will have to implement these methods.
     public abstract ICursoDAO getCursoDAO();
     public abstract IAlumnoDAO getAlumnoDAO();
+    public abstract IEmpleadoDAO getEmpleadoDAO();
 
     // There will going to return subFabrica according to the type
     public static DAOFabrica getDAOFabrica(int tipo) {        
