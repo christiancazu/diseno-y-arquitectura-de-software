@@ -25,6 +25,7 @@ public class MySQLCursoDAO implements ICursoDAO {
         Connection conn = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
+        
         try {
             conn = MySQLDBConexion.getConexion();
             
@@ -33,6 +34,7 @@ public class MySQLCursoDAO implements ICursoDAO {
             pstm = conn.prepareStatement(sql);
             rs = pstm.executeQuery();
             Curso curso = null;
+            
             while (rs.next()) {
                 curso = new Curso();
                 curso.setId(rs.getInt("id"));
@@ -57,7 +59,7 @@ public class MySQLCursoDAO implements ICursoDAO {
             } catch (SQLException e) {
             }
         }
-
+        
         return cursos;
     }
 
@@ -67,8 +69,8 @@ public class MySQLCursoDAO implements ICursoDAO {
 
         Connection conn = null;
         PreparedStatement pstm = null;
+        
         try {
-
             conn = MySQLDBConexion.getConexion();
             
             String sql = "INSERT INTO " + CURSO + 
@@ -92,6 +94,7 @@ public class MySQLCursoDAO implements ICursoDAO {
             } catch (SQLException e2) {
             }
         }
+        
         return salida;
     }
 
@@ -101,12 +104,89 @@ public class MySQLCursoDAO implements ICursoDAO {
     }
 
     @Override
-    public int actualizar(Curso entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int actualizar(Curso curso) {
+        int salida = -1;
+        
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        
+        try {           
+            conn = MySQLDBConexion.getConexion();
+            
+            String sql =
+                "UPDATE " + CURSO +
+                " SET nombre = ?, docente = ?, lugar = ? " +
+                " WHERE id = ?";            
+  
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, curso.getNombre());
+            pstm.setString(2, curso.getDocente());
+            pstm.setString(3, curso.getLugar());
+            pstm.setInt(4, curso.getId());
+            
+            salida = pstm.executeUpdate();
+            
+        } catch (SQLException e) {
+        } finally {
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+            }
+        }
+
+        return salida;
     }
     
     @Override
     public Curso getById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Curso curso = null;
+        
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        
+        try {           
+            conn = MySQLDBConexion.getConexion();
+            
+            String sql =
+                    "SELECT * " +
+                    "FROM " + CURSO + " " +
+                    "WHERE id = ?";            
+            
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, id);
+            rs = pstm.executeQuery();
+            
+            rs.next();       
+            
+            curso = new Curso();            
+            curso.setId(rs.getInt("id"));
+            curso.setNombre(rs.getString("nombre"));
+            curso.setDocente(rs.getString("docente"));
+            curso.setLugar(rs.getString("lugar"));
+
+        } catch (SQLException e) {
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstm != null) {
+                    pstm.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+            }
+        }
+
+        return curso;
     }
+ 
 }
