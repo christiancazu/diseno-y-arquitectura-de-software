@@ -100,7 +100,36 @@ public class MySQLCursoDAO implements ICursoDAO {
 
     @Override
     public int eliminar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int salida = -1;
+        
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        
+        try {           
+            conn = MySQLDBConexion.getConexion();
+            
+            String sql =
+                    "DELETE FROM " + CURSO +
+                    " WHERE id = ?";            
+  
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, id);
+            salida = pstm.executeUpdate();
+            
+        } catch (SQLException e) {
+        } finally {
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+            }
+        }
+
+        return salida;
     }
 
     @Override
