@@ -1,14 +1,12 @@
 <%-- 
     Document   : head
     Created on : May 12, 2019, 9:35:19 PM
-    Author     : Christian Carrillo ZÃºÃ±iga
+    Author     : Christian Carrillo Zúñiga
 --%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>WebColegioMVC - ${param.title}</title>
+        <title>Instituto - ${param.pageTitle}</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/app.css">

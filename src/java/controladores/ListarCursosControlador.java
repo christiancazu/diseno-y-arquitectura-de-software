@@ -35,6 +35,6 @@ public class ListarCursosControlador extends HttpServlet {
 
         List<Curso> cursos = dao.getAll();
         request.setAttribute("cursos", cursos);
-        request.getRequestDispatcher("/pages/cursos.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/cursos.jsp").forward(request, response);
     } 
 }

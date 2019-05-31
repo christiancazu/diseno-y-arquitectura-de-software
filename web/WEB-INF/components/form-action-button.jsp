@@ -1,10 +1,8 @@
 <%-- 
     Document   : form-action-button
     Created on : May 15, 2019, 9:01:13 PM
-    Author     : christian
+    Author     : Christian Carrillo Zúñiga
 --%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <form 
     action="${param.action}"
     method="${param.method}"

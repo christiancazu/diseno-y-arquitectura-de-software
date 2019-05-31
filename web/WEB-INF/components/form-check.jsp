@@ -1,10 +1,8 @@
 <%-- 
     Document   : form-check
     Created on : May 13, 2019, 1:00:09 AM
-    Author     : Christian Carrillo ZÃºÃ±iga
+    Author     : Christian Carrillo Zúñiga
 --%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <div class="form-check">
     <input class="form-check-input" 
         type="radio" 
