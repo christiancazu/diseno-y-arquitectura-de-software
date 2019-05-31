@@ -19,7 +19,8 @@
     component.put("formGroup", "../components/form-group.jsp");
     component.put("buttonForm", "../components/button-form.jsp");
     component.put("buttonGoTo", "../components/button-go-to.jsp");
-
+    component.put("alertMessage", "../components/alert-message.jsp");
+    
     // setting component attribute as pageContext
     request.setAttribute("component", component);
 
@@ -76,26 +77,17 @@
 
         </form> 
 
+        <%-- alert message --%>    
         <c:if 
             test="${not empty success}" 
             var="isSuccess" 
             scope="request"
-            >                     
-            <div class="alert alert-dismissible show mt-2
-                 ${isSuccess                  
-                ? "alert-success" 
-                : "alert-danger"}"
-                 role="alert"
-                 >
-                <h6 class="text-center">
-                    El curso ${isSuccess
-                       ? "ha sido registrado satisfactoriamente." 
-                       : "no ha podido ser registrado."}
-                </h6>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+        >                     
+            <jsp:include page="${component.alertMessage}">
+                <jsp:param name="isSuccess" value="true" />
+                <jsp:param name="entidad" value="curso" />
+                <jsp:param name="accion" value="registrado" />
+            </jsp:include>
         </c:if>
     </t:mainCardTemplate>
     
