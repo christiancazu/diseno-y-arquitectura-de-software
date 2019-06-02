@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author Christian Carrillo Zúñiga
  */
-public interface IEmpleadoDAO extends IGenericDAO<Empleado> {
+public interface IEmpleadoDAO extends ICRUDDAO<Empleado> {
 
     @Override
     public int eliminar(int id);

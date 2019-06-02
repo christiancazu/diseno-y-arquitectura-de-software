@@ -7,7 +7,7 @@ import java.util.List;
  * @author Christian Carrillo Zúñiga
  * @param <T>
  */
-public interface IGenericDAO<T> {
+public interface ICRUDDAO<T> {
 
     T getById(int id);   
 

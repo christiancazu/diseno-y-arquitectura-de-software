@@ -1,5 +1,7 @@
 package dao.fabrica;
 
+import dao.IAlumnoDAO;
+import dao.ICursoDAO;
 import dao.IEmpleadoDAO;
 import dao.impl.MySQLCursoDAO;
 import dao.impl.MySQLAlumnoDAO;
@@ -12,12 +14,12 @@ import dao.impl.MySQLEmpleadoDAO;
 public class MySQLDAOFabrica extends DAOFabrica {
     
     @Override
-    public MySQLCursoDAO getCursoDAO() {
+    public ICursoDAO getCursoDAO() {
         return new MySQLCursoDAO();
     }
     
     @Override
-    public MySQLAlumnoDAO getAlumnoDAO() {
+    public IAlumnoDAO getAlumnoDAO() {
         return new MySQLAlumnoDAO();
     }
 
