@@ -10,18 +10,18 @@ import java.util.List;
 public interface IPeliculaDAO extends ICRUDDAO<Pelicula> {
 
     @Override
-    public boolean eliminar(int id);
-
+    public Pelicula getById(int id) throws Exception;
+    
     @Override
-    public boolean actualizar(Pelicula entity);
-
+    public List<Pelicula> getAll() throws Exception;
+    
     @Override
-    public boolean crear(Pelicula entity);
-
+    public boolean crear(Pelicula entity) throws Exception;
+    
     @Override
-    public List<Pelicula> getAll();
-
+    public boolean actualizar(Pelicula entity) throws Exception;
+    
     @Override
-    public Pelicula getById(int id);
+    public boolean eliminar(int id) throws Exception;
     
 }

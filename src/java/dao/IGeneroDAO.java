@@ -10,18 +10,18 @@ import java.util.List;
 public interface IGeneroDAO extends ICRUDDAO<Genero> {
 
     @Override
-    public boolean eliminar(int id);
+    public Genero getById(int id) throws Exception;
 
     @Override
-    public boolean actualizar(Genero entity);
+    public List<Genero> getAll() throws Exception;
 
     @Override
-    public boolean crear(Genero entity);
+    public boolean crear(Genero entity) throws Exception;
 
     @Override
-    public List<Genero> getAll();
+    public boolean actualizar(Genero entity) throws Exception;
 
     @Override
-    public Genero getById(int id);
+    public boolean eliminar(int id) throws Exception; 
         
 }

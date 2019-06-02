@@ -10,18 +10,18 @@ import java.util.List;
 public interface IEncuestaDAO extends ICRUDDAO<Encuesta> {
 
     @Override
-    public boolean eliminar(int id);
+    public Encuesta getById(int id) throws Exception;
 
     @Override
-    public boolean actualizar(Encuesta entity);
+    public List<Encuesta> getAll() throws Exception;
 
     @Override
-    public boolean crear(Encuesta entity);
+    public boolean crear(Encuesta entity) throws Exception;
 
     @Override
-    public List<Encuesta> getAll();
+    public boolean actualizar(Encuesta entity) throws Exception;
 
     @Override
-    public Encuesta getById(int id);
+    public boolean eliminar(int id) throws Exception; 
         
 }
