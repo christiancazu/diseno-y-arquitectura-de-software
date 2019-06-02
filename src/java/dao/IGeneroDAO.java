@@ -10,13 +10,13 @@ import java.util.List;
 public interface IGeneroDAO extends ICRUDDAO<Genero> {
 
     @Override
-    public int eliminar(int id);
+    public boolean eliminar(int id);
 
     @Override
-    public int actualizar(Genero entity);
+    public boolean actualizar(Genero entity);
 
     @Override
-    public int crear(Genero entity);
+    public boolean crear(Genero entity);
 
     @Override
     public List<Genero> getAll();

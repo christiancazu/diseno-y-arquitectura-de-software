@@ -13,10 +13,10 @@ public interface ICRUDDAO<T> {
 
     List<T> getAll();
     
-    int crear(T entity);
+    boolean crear(T entity);
     
-    int actualizar(T entity);
+    boolean actualizar(T entity);
 
-    int eliminar(int id);
+    boolean eliminar(int id);
 
 }

@@ -10,13 +10,13 @@ import java.util.List;
 public interface IPeliculaDAO extends ICRUDDAO<Pelicula> {
 
     @Override
-    public int eliminar(int id);
+    public boolean eliminar(int id);
 
     @Override
-    public int actualizar(Pelicula entity);
+    public boolean actualizar(Pelicula entity);
 
     @Override
-    public int crear(Pelicula entity);
+    public boolean crear(Pelicula entity);
 
     @Override
     public List<Pelicula> getAll();
