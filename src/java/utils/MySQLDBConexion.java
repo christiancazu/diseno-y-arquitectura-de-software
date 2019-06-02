@@ -9,27 +9,26 @@ import java.sql.SQLException;
  * @author Christian Carrillo Zúñiga
  */
 public class MySQLDBConexion {
-    
+
+    protected Connection connection;
+
     private static final String DRIVER = "com.mysql.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost/peliculas";
-    private static final String USER= "root";
-    private static final String PASSWORD = "";    
+    private static final String USER = "root";
+    private static final String PASSWORD = "";
 
-    static {
+    public void getConexion() throws Exception {
         try {
             Class.forName(DRIVER);
-        } catch (ClassNotFoundException e) {
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (SQLException e) {
+            throw e;
         }
     }
 
-    public static Connection getConexion() {
-        Connection con = null;
-        
-        try {
-            con = DriverManager.getConnection(URL, USER, PASSWORD);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }        
-        return con;
+    public void closeConexion() throws SQLException {
+        if (connection != null && !connection.isClosed()) {
+            connection.close();
+        }
     }
 }
