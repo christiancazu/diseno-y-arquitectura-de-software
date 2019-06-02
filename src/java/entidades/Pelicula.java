@@ -1,7 +1,7 @@
 package entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -52,11 +52,11 @@ public class Pelicula implements Serializable {
     @Size(max = 200)
     @Column(name = "imagen")
     private String imagen;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "peliculaId")
-    private Collection<Encuesta> encuestaCollection;
-    @JoinColumn(name = "genero_id", referencedColumnName = "id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pelicula")
+    private List<Encuesta> encuestaList;
+    @JoinColumn(name = "genero", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Genero generoId;
+    private Genero genero;
 
     public Pelicula() {
     }
@@ -103,20 +103,20 @@ public class Pelicula implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Encuesta> getEncuestaCollection() {
-        return encuestaCollection;
+    public List<Encuesta> getEncuestaList() {
+        return encuestaList;
     }
 
-    public void setEncuestaCollection(Collection<Encuesta> encuestaCollection) {
-        this.encuestaCollection = encuestaCollection;
+    public void setEncuestaList(List<Encuesta> encuestaList) {
+        this.encuestaList = encuestaList;
     }
 
-    public Genero getGeneroId() {
-        return generoId;
+    public Genero getGenero() {
+        return genero;
     }
 
-    public void setGeneroId(Genero generoId) {
-        this.generoId = generoId;
+    public void setGenero(Genero genero) {
+        this.genero = genero;
     }
 
     @Override

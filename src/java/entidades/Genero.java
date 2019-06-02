@@ -1,7 +1,7 @@
 package entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -39,8 +39,8 @@ public class Genero implements Serializable {
     @Size(max = 50)
     @Column(name = "nombre")
     private String nombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "generoId")
-    private Collection<Pelicula> peliculaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "genero")
+    private List<Pelicula> peliculaList;
 
     public Genero() {
     }
@@ -66,12 +66,12 @@ public class Genero implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Pelicula> getPeliculaCollection() {
-        return peliculaCollection;
+    public List<Pelicula> getPeliculaList() {
+        return peliculaList;
     }
 
-    public void setPeliculaCollection(Collection<Pelicula> peliculaCollection) {
-        this.peliculaCollection = peliculaCollection;
+    public void setPeliculaList(List<Pelicula> peliculaList) {
+        this.peliculaList = peliculaList;
     }
 
     @Override

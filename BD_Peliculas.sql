@@ -46,7 +46,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `encuesta` (
   `id` int(11) NOT NULL,
-  `pelicula_id` int(11) NOT NULL,
+  `pelicula` int(11) NOT NULL,
   `voto` char(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -54,7 +54,7 @@ CREATE TABLE `encuesta` (
 -- Volcado de datos para la tabla `encuesta`
 --
 
-INSERT INTO `encuesta` (`id`, `pelicula_id`, `voto`) VALUES
+INSERT INTO `encuesta` (`id`, `pelicula`, `voto`) VALUES
 (1, 1, 'N'),
 (2, 2, 'S'),
 (3, 3, 'S'),
@@ -100,14 +100,14 @@ CREATE TABLE `pelicula` (
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(100) DEFAULT NULL,
   `imagen` varchar(200) DEFAULT NULL,
-  `genero_id` int(11) NOT NULL
+  `genero` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pelicula`
 --
 
-INSERT INTO `pelicula` (`id`, `nombre`, `descripcion`, `imagen`, `genero_id`) VALUES
+INSERT INTO `pelicula` (`id`, `nombre`, `descripcion`, `imagen`, `genero`) VALUES
 (1, 'DEADPOOL', 'Pelicula de acción y comedia', 'peli01.jpg', 4),
 (2, 'IT', 'Pelicula de Terror basada en novela de Stephen King', 'peli02.jpg', 2),
 (3, 'ONCE MACHOS', 'Pelicula peruana de comedia y futbol', 'peli03.jpg', 1),
@@ -122,7 +122,7 @@ INSERT INTO `pelicula` (`id`, `nombre`, `descripcion`, `imagen`, `genero_id`) VA
 --
 ALTER TABLE `encuesta`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_encuesta_pelicula_id` (`pelicula_id`);
+  ADD KEY `fk_encuesta_pelicula` (`pelicula`);
 
 --
 -- Indices de la tabla `genero`
@@ -135,7 +135,7 @@ ALTER TABLE `genero`
 --
 ALTER TABLE `pelicula`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_pelicula_genero_id` (`genero_id`);
+  ADD KEY `fk_pelicula_genero` (`genero`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -167,13 +167,13 @@ ALTER TABLE `pelicula`
 -- Filtros para la tabla `encuesta`
 --
 ALTER TABLE `encuesta`
-  ADD CONSTRAINT `fk_encuesta_pelicula` FOREIGN KEY (`pelicula_id`) REFERENCES `pelicula` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_encuesta_pelicula` FOREIGN KEY (`pelicula`) REFERENCES `pelicula` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `pelicula`
 --
 ALTER TABLE `pelicula`
-  ADD CONSTRAINT `fk_pelicula_genero` FOREIGN KEY (`genero_id`) REFERENCES `genero` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_pelicula_genero` FOREIGN KEY (`genero`) REFERENCES `genero` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

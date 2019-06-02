@@ -35,9 +35,9 @@ public class Encuesta implements Serializable {
     private Integer id;
     @Column(name = "voto")
     private Character voto;
-    @JoinColumn(name = "pelicula_id", referencedColumnName = "id")
+    @JoinColumn(name = "pelicula", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Pelicula peliculaId;
+    private Pelicula pelicula;
 
     public Encuesta() {
     }
@@ -62,12 +62,12 @@ public class Encuesta implements Serializable {
         this.voto = voto;
     }
 
-    public Pelicula getPeliculaId() {
-        return peliculaId;
+    public Pelicula getPelicula() {
+        return pelicula;
     }
 
-    public void setPeliculaId(Pelicula peliculaId) {
-        this.peliculaId = peliculaId;
+    public void setPelicula(Pelicula pelicula) {
+        this.pelicula = pelicula;
     }
 
     @Override
