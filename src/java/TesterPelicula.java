@@ -7,7 +7,7 @@ import entidades.Pelicula;
  *
  * @author Christian Carrillo Zúñiga
  */
-public class Tester {
+public class TesterPelicula {
  
     static DAOFabrica subFabrica = DAOFabrica.getDAOFabrica(DAOFabrica.MYSQL);
     static IPeliculaDAO iPeliculaDAO = subFabrica.getPeliculaDAO();
