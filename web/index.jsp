@@ -10,45 +10,47 @@
 <%@page import="java.util.List" %>
 <%@page import="java.util.HashMap" %>
 
-<%@page import="elements.FormGroup" %>
-
 <%
     // components paths
     HashMap<String, String> component = new HashMap();
 
-    component.put("formGroup", "/WEB-INF/components/form-group.jsp");
-    component.put("buttonForm", "/WEB-INF/components/button-form.jsp");
-    component.put("buttonGoTo", "/WEB-INF/components/button-go-to.jsp");
-    component.put("alertMessage", "/WEB-INF/components/alert-message.jsp");
-    
+    component.put("buttonFloat", "/WEB-INF/components/button-float.jsp");
+    component.put("cardFilm", "/WEB-INF/components/card-film.jsp");
+
     // setting component attribute as pageContext
     request.setAttribute("component", component);
-
-    // context for formGroups components
-    List<FormGroup> formGroups = new ArrayList();
-
-    formGroups.add(
-            new FormGroup("Usuario", "usuario", "", "text", "usuario", "text-usuario", true));
-    formGroups.add(
-            new FormGroup("Contraseña", "contrasena", "", "password", "contraseña", "text-contraseña", true));
-
-    // setting formGroups attribute as pageContext
-    request.setAttribute("formGroups", formGroups);
 %>
 
 <t:baseTemplate
     pageTitle="Películas"
     navbarBgColor="bg-danger"
     navbarActiveLink="peliculas"
->
-<t:mainContentTemplate>
-
-    <t:mainCardTemplate 
-        cardTitle="Películas"
     >
-        
-    </t:mainCardTemplate>
+    <t:mainContentTemplate>
 
-</t:mainContentTemplate>
+        <t:mainCardTemplate cardTitle="Películas"> 
+                
+            <c:forEach var="pelicula" items="${peliculas}">
+                
+                <%-- card film --%>
+                <jsp:include page="${component.cardFilm}">
+                    <jsp:param name="id" value="${pelicula.getId()}" />
+                    <jsp:param name="nombre" value="${pelicula.getNombre()}" />
+                    <jsp:param name="descripcion" value="${pelicula.getDescripcion()}" />
+                    <jsp:param name="imagen" value="${pelicula.getImagen()}" />
+                    <jsp:param name="nombreGenero" value="${pelicula.getGenero().getNombre()}" />
+                </jsp:include>
+                
+            </c:forEach>
 
+        </t:mainCardTemplate>
+
+    </t:mainContentTemplate>
+
+    <%-- button float --%>
+    <jsp:include page="${component.buttonFloat}">
+        <jsp:param name="path" value="crearPelicula" />
+        <jsp:param name="btnName" value="Crear" />
+    </jsp:include>
+    
 </t:baseTemplate>
