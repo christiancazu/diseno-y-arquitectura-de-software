@@ -14,23 +14,36 @@ public class TesterPelicula {
 
     public static void main(String[] args) throws Exception {
         
-        getById();
+        //getById();
         
         getAll();
                                
-        crear();
+        /*crear();
         
         actualizar();
         
-        eliminar();
+        eliminar();*/
     }
 
     private static void getById() throws Exception {
-        System.out.println(iPeliculaDAO.getById(2));
+        Pelicula pelicula = iPeliculaDAO.getById(2);
+        System.out.println(
+                "peliculaId=" + pelicula.getId() + 
+                " nombre=" + pelicula.getNombre() + 
+                " descrip=" + pelicula.getDescripcion() +
+                " imagen=" + pelicula.getImagen() +
+                " generoId=" + pelicula.getGenero().getId());
     }
 
     private static void getAll() throws Exception {
-        System.out.println(iPeliculaDAO.getAll());
+        for (Pelicula pelicula : iPeliculaDAO.getAll()) {
+            System.out.println(
+                "peliculaId=" + pelicula.getId() + 
+                " nombre=" + pelicula.getNombre() + 
+                " descrip=" + pelicula.getDescripcion() +
+                " imagen=" + pelicula.getImagen() +
+                " generoId=" + pelicula.getGenero().getId());
+        }
     }    
     
     private static void crear() throws Exception {

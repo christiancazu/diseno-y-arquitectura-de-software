@@ -1,6 +1,7 @@
 package dao.impl;
 
 import dao.IPeliculaDAO;
+import entidades.Genero;
 import entidades.Pelicula;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,6 +40,7 @@ public class MySQLPeliculaDAO extends MySQLDBConexion implements IPeliculaDAO {
             pelicula.setNombre(rs.getString("nombre"));
             pelicula.setDescripcion(rs.getString("descripcion"));
             pelicula.setImagen(rs.getString("imagen"));
+            pelicula.setGenero(new Genero(Integer.parseInt(rs.getString("genero"))));
 
         } catch (Exception e) {
             throw e;
@@ -69,6 +71,7 @@ public class MySQLPeliculaDAO extends MySQLDBConexion implements IPeliculaDAO {
                 pelicula.setNombre(rs.getString("nombre"));
                 pelicula.setDescripcion(rs.getString("descripcion"));
                 pelicula.setImagen(rs.getString("imagen"));
+                pelicula.setGenero(new Genero(Integer.parseInt(rs.getString("genero"))));
                 peliculas.add(pelicula);
             }    
 
