@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : May 12, 2019, 9:36:48 PM
+    Document   : newjsp
+    Created on : Jun 3, 2019, 6:17:51 PM
     Author     : Christian Carrillo Zúñiga
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

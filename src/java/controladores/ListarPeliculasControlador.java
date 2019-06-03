@@ -37,6 +37,6 @@ public class ListarPeliculasControlador extends HttpServlet {
             Logger.getLogger(ListarPeliculasControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
                 
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/pages/peliculas.jsp").forward(request, response);
     }
 }
