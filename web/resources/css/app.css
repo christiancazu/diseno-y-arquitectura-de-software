@@ -16,27 +16,58 @@
     max-height: 32px;
 }
 
-.img-utp-bg {
-    min-height: 100vh;
-    background-color: tomato;
-    background: url(../images/utp-campus.jpg) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
-
 .main-content {
     margin-top: 64px;
 }
 
-/* set text-shadow on navbar links */
-.navbar-dark .navbar-nav .nav-link {
-    text-shadow: 2px 2px 4px #000;
+/* text navbar links */
+.navbar-dark .navbar-nav .nav-link:not(.active) {    
+    opacity: .7;
 }
 
-.card-login {
-    background-color: rgba(0, 0, 0, .5) !important;
-    color: white;
-    margin-top: 96px;
+.card-img {
+    max-height: 320px;
+}
+
+.title-app {
+    font-size: 16px;
+}
+
+.bottom-align-text {
+    position: absolute;
+    bottom: 1.25rem;
+    left: 1.25rem;
+}
+
+.svg-img-like-container {   
+    display: inline;
+    
+    margin-right: .5rem;
+}
+
+.svg-img-like {
+    pointer-events: none; 
+    width: 10%; 
+    height: 100%; 
+    max-height: 24px; 
+    fill: #999;
+}
+
+.rotate-180 {
+    margin-bottom: -12px;
+    transform: rotate(180deg);
+}
+  
+.like-counter {
+    position: absolute;
+    top: 4px;
+}
+
+@media screen and (min-width: 768px) {
+    .card-img {
+        max-height: 160px;
+    }
+    .title-app {
+        font-size: 1.40625rem;
+    }
 }

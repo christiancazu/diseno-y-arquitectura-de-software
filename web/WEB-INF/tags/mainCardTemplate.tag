@@ -11,7 +11,7 @@
 <%@attribute name="cardTitle" required="true" %>
 <%@attribute name="cardBg" %>
 
-<div class="card ${cardBg}">
+<div class="card">
     <div class="card-header">
         <h4 class="card-title text-center">${cardTitle}</h4>
     </div>

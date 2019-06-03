@@ -27,7 +27,7 @@
                 </div>
             </div>
         </a>
-        <h4 class="mt-2 text-light">Universidad Tecnológica del Perú</h4>        
+        <h4 class="title-app mt-2">Universidad Tecnológica del Perú</h4>        
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
