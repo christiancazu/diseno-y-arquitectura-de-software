@@ -12,7 +12,7 @@
         name="id" 
         value="${param.value}"
     >                                
-    <button class="btn btn-${param.btnType} mx-2">
+    <button class="btn btn-block btn-${param.btnType} mb-2">
         ${param.btnName}
     </button>
 </form>
