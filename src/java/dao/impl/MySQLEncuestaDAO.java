@@ -2,6 +2,7 @@ package dao.impl;
 
 import dao.IEncuestaDAO;
 import entidades.Encuesta;
+import entidades.Genero;
 import entidades.Pelicula;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,7 +38,7 @@ public class MySQLEncuestaDAO extends MySQLDBConexion implements IEncuestaDAO {
             
             encuesta = new Encuesta();            
             encuesta.setId(rs.getInt("id"));
-            encuesta.setPelicula(new Pelicula(Integer.parseInt(rs.getString("pelicula"))));
+            encuesta.setPelicula(getPeliculaById(rs.getInt("pelicula")));
             encuesta.setVoto(rs.getString("voto").charAt(0));
         } catch (Exception e) {
             throw e;
@@ -63,10 +64,9 @@ public class MySQLEncuestaDAO extends MySQLDBConexion implements IEncuestaDAO {
             encuestas = new ArrayList<>();
             
             while (rs.next()) {
-                Encuesta encuesta = new Encuesta();            
-                encuesta = new Encuesta();            
+                Encuesta encuesta = new Encuesta();           
                 encuesta.setId(rs.getInt("id"));
-                encuesta.setPelicula(new Pelicula(Integer.parseInt(rs.getString("pelicula"))));
+                encuesta.setPelicula(getPeliculaById(rs.getInt("pelicula")));
                 encuesta.setVoto(rs.getString("voto").charAt(0));
                 encuestas.add(encuesta);
             }    
@@ -158,4 +158,10 @@ public class MySQLEncuestaDAO extends MySQLDBConexion implements IEncuestaDAO {
 
         return resultado == 1;
     } 
+    
+    private Pelicula getPeliculaById(int id) throws Exception {     
+        MySQLPeliculaDAO mySQLPeliculaDAO = new MySQLPeliculaDAO(); 
+        
+        return mySQLPeliculaDAO.getById(id);
+    }
 }

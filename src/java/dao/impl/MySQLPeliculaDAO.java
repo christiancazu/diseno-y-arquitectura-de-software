@@ -33,14 +33,14 @@ public class MySQLPeliculaDAO extends MySQLDBConexion implements IPeliculaDAO {
             pstm.setInt(1, id);
             ResultSet rs = pstm.executeQuery();
             
-            rs.next();       
+            rs.next();          
             
             pelicula = new Pelicula();            
             pelicula.setId(rs.getInt("id"));
             pelicula.setNombre(rs.getString("nombre"));
             pelicula.setDescripcion(rs.getString("descripcion"));
             pelicula.setImagen(rs.getString("imagen"));
-            pelicula.setGenero(new Genero(Integer.parseInt(rs.getString("genero"))));
+            pelicula.setGenero(getGeneroById(rs.getInt("genero")));
 
         } catch (Exception e) {
             throw e;
@@ -65,13 +65,13 @@ public class MySQLPeliculaDAO extends MySQLDBConexion implements IPeliculaDAO {
             
             peliculas = new ArrayList<>();
             
-            while (rs.next()) {
+            while (rs.next()) {                
                 Pelicula pelicula = new Pelicula();            
                 pelicula.setId(rs.getInt("id"));
                 pelicula.setNombre(rs.getString("nombre"));
                 pelicula.setDescripcion(rs.getString("descripcion"));
                 pelicula.setImagen(rs.getString("imagen"));
-                pelicula.setGenero(new Genero(Integer.parseInt(rs.getString("genero"))));
+                pelicula.setGenero(getGeneroById(rs.getInt("genero")));
                 peliculas.add(pelicula);
             }    
 
@@ -166,4 +166,10 @@ public class MySQLPeliculaDAO extends MySQLDBConexion implements IPeliculaDAO {
 
         return resultado == 1;
     } 
+
+    private Genero getGeneroById(int id) throws Exception {     
+        MySQLGeneroDAO mySQLGeneroDAO = new MySQLGeneroDAO(); 
+        
+        return mySQLGeneroDAO.getById(id);
+    }
 }

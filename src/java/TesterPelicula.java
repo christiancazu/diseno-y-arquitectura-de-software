@@ -32,7 +32,8 @@ public class TesterPelicula {
                 " nombre=" + pelicula.getNombre() + 
                 " descrip=" + pelicula.getDescripcion() +
                 " imagen=" + pelicula.getImagen() +
-                " generoId=" + pelicula.getGenero().getId());
+                " generoId=" + pelicula.getGenero().getId() +
+                " generoNombre=" + pelicula.getGenero().getNombre());
     }
 
     private static void getAll() throws Exception {
@@ -42,7 +43,8 @@ public class TesterPelicula {
                 " nombre=" + pelicula.getNombre() + 
                 " descrip=" + pelicula.getDescripcion() +
                 " imagen=" + pelicula.getImagen() +
-                " generoId=" + pelicula.getGenero().getId());
+                " generoId=" + pelicula.getGenero().getId() +
+                " generoNombre=" + pelicula.getGenero().getNombre());
         }
     }    
     

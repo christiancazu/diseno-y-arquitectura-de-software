@@ -28,9 +28,10 @@ public class TesterEncuesta {
     private static void getById() throws Exception {
         Encuesta encuesta = iEncuestaDAO.getById(2);
         System.out.println(
-                    "encuestaId=" + encuesta.getId() + 
-                    " peliId=" + encuesta.getPelicula().getId() + 
-                    " voto=" + encuesta.getVoto());
+                "encuestaId=" + encuesta.getId() + 
+                " peliId=" + encuesta.getPelicula().getId() + 
+                " peliName=" + encuesta.getPelicula().getNombre()+
+                " voto=" + encuesta.getVoto());
     }
 
     private static void getAll() throws Exception {
@@ -38,6 +39,7 @@ public class TesterEncuesta {
             System.out.println(
                     "encuestaId=" + encuesta.getId() + 
                     " peliId=" + encuesta.getPelicula().getId() + 
+                    " peliName=" + encuesta.getPelicula().getNombre()+
                     " voto=" + encuesta.getVoto());
         }
     }    
