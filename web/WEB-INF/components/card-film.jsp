@@ -14,6 +14,7 @@
     // components paths
     HashMap<String, String> cardFilmComponent = new HashMap();
     cardFilmComponent.put("formActionButton", "/WEB-INF/components/form-action-button.jsp");
+    cardFilmComponent.put("svgImgLike", "/WEB-INF/components/svg-img-like.jsp");
     
     // setting component attribute as pageContext
     request.setAttribute("cardFilmComponent", cardFilmComponent);
@@ -35,24 +36,26 @@
         <div class="col-md-3">
             <img class="card-img" 
                  alt="${param.imagen}"
-                 src="${pageContext.request.contextPath}/resources/images/${param.imagen}"
+                 src="${pageContext.request.contextPath}/resources/images/peliculas/${param.imagen}"
             >
         </div>
         <div class="col-md-7">
             <div class="card-body">
-                <h5 class="card-title">${param.nombre}</h5>
+                <h5 class="card-title"><span class="badge badge-dark">${param.id}</span> &nbsp ${param.nombre}</h5>
                 <p class="card-text text-muted mb-4">${param.descripcion}</p>
+                
                 <div class="bottom-align-text">
-                    <div class="svg-img-like-container">
-                        <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" class="svg-img-like"><g>
-                        <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.91l-.01-.01L23 10z" class="style-scope yt-icon"></path>
-                        </g></svg><span class="like-counter text-dark">${param.likes}</span>
-                    </div>
-                    <div class="svg-img-like-container">
-                        <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" class="svg-img-like rotate-180"><g>
-                        <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.91l-.01-.01L23 10z" class="style-scope yt-icon"></path>
-                        </g></svg><span class="like-counter text-dark">${param.unlikes}</span> 
-                    </div>
+                      
+                    <jsp:include page="${cardFilmComponent.svgImgLike}">
+                        <jsp:param name="rotate" value="" />
+                        <jsp:param name="likesUnlikes" value="${param.likes}" />
+                    </jsp:include>
+                    
+                    <jsp:include page="${cardFilmComponent.svgImgLike}">
+                        <jsp:param name="rotate" value="rotate-180" />
+                        <jsp:param name="likesUnlikes" value="${param.unlikes}" />
+                    </jsp:include>
+                    
                 </div>
             </div>
         </div>

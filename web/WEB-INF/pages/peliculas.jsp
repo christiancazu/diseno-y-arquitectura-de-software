@@ -39,6 +39,8 @@
                     <jsp:param name="descripcion" value="${pelicula.getDescripcion()}" />
                     <jsp:param name="imagen" value="${pelicula.getImagen()}" />
                     <jsp:param name="nombreGenero" value="${pelicula.getGenero().getNombre()}" />
+                    <jsp:param name="likes" value="#" />
+                    <jsp:param name="unlikes" value="#" />
                 </jsp:include>
                 
             </c:forEach>
@@ -54,4 +56,3 @@
     </jsp:include>
     
 </t:baseTemplate>
-
