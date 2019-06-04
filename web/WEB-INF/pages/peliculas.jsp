@@ -1,5 +1,5 @@
 <%-- 
-    Document   : newjsp
+    Document   : peliculas
     Created on : Jun 3, 2019, 6:17:51 PM
     Author     : Christian Carrillo Zúñiga
 --%>
@@ -44,13 +44,14 @@
             </c:forEach>
 
         </t:mainCardTemplate>
-
+        
     </t:mainContentTemplate>
 
     <%-- button float --%>
     <jsp:include page="${component.buttonFloat}">
-        <jsp:param name="path" value="crearPelicula" />
-        <jsp:param name="btnName" value="Crear" />
+        <jsp:param name="path" value="registrarPelicula" />
+        <jsp:param name="btnName" value="Registrar" />
     </jsp:include>
     
 </t:baseTemplate>
+
