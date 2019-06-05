@@ -1,9 +1,3 @@
-﻿-- Servidor: 127.0.0.1
--- Tiempo de generación: 31-05-2019 a las 14:42:55
--- Versión del servidor: 10.1.34-MariaDB
--- Versión de PHP: 7.2.7
--- MySQL Workbench Forward Engineering
-
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
@@ -167,13 +161,13 @@ ALTER TABLE `pelicula`
 -- Filtros para la tabla `encuesta`
 --
 ALTER TABLE `encuesta`
-  ADD CONSTRAINT `fk_encuesta_pelicula` FOREIGN KEY (`pelicula`) REFERENCES `pelicula` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_encuesta_pelicula` FOREIGN KEY (`pelicula`) REFERENCES `pelicula` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `pelicula`
 --
 ALTER TABLE `pelicula`
-  ADD CONSTRAINT `fk_pelicula_genero` FOREIGN KEY (`genero`) REFERENCES `genero` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_pelicula_genero` FOREIGN KEY (`genero`) REFERENCES `genero` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
