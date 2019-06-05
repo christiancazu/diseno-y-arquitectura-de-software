@@ -45,9 +45,8 @@ public class ActualizarPeliculaControlador extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int idPelicula = 1;
+        int idPelicula = Integer.parseInt(request.getParameter("id"));
 
-        if (isRequestValid(request)) idPelicula = Integer.parseInt(request.getParameter("id"));
         try {
             currentPelicula = iPeliculaDAO.getById(idPelicula);
             
@@ -90,24 +89,18 @@ public class ActualizarPeliculaControlador extends HttpServlet {
                     // forcing delay to load well the new image path in frontend
                     makeDelay(2000);
                 }
-                request.setAttribute("success", true);
+                request.setAttribute("success", true);                
+                request.setAttribute("pelicula", iPeliculaDAO.getById(currentPelicula.getId()));
+                request.setAttribute("generos", iGeneroDAO.getAll());
             }
-
         } catch (Exception ex) {
             request.setAttribute("success", false);
             Logger.getLogger(RegistrarPeliculaControlador.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        doGet(request, response);
+        }  
+        request.getRequestDispatcher("/WEB-INF/pages/actualizarPelicula.jsp").forward(request, response);
     }
 
     private void makeDelay(int delayTime) throws InterruptedException {
         Thread.sleep(delayTime);
-    }
-
-    private boolean isRequestValid(HttpServletRequest request) {
-        return 
-            request.getParameter("id") != null
-            && !request.getParameter("id").equals("");         
     }
 }
