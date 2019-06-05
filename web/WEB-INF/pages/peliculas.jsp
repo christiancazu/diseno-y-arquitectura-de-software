@@ -44,17 +44,17 @@
                 </jsp:include>
             </c:if>
                 
-            <c:forEach var="pelicula" items="${peliculas}">
+            <c:forEach var="fullPelicula" items="${fullPeliculas}">
                 
                 <%-- card film --%>
                 <jsp:include page="${component.cardFilm}">
-                    <jsp:param name="id" value="${pelicula.getId()}" />
-                    <jsp:param name="nombre" value="${pelicula.getNombre()}" />
-                    <jsp:param name="descripcion" value="${pelicula.getDescripcion()}" />
-                    <jsp:param name="imagen" value="${pelicula.getImagen()}" />
-                    <jsp:param name="nombreGenero" value="${pelicula.getGenero().getNombre()}" />
-                    <jsp:param name="likes" value="#" />
-                    <jsp:param name="dislikes" value="#" />
+                    <jsp:param name="id" value="${fullPelicula.getPelicula().getId()}" />
+                    <jsp:param name="nombre" value="${fullPelicula.getPelicula().getNombre()}" />
+                    <jsp:param name="descripcion" value="${fullPelicula.getPelicula().getDescripcion()}" />
+                    <jsp:param name="imagen" value="${fullPelicula.getPelicula().getImagen()}" />
+                    <jsp:param name="nombreGenero" value="${fullPelicula.getPelicula().getGenero().getNombre()}" />
+                    <jsp:param name="likes" value="${fullPelicula.getLikes()}" />
+                    <jsp:param name="dislikes" value="${fullPelicula.getDislikes()}" />
                 </jsp:include>
                 
             </c:forEach>
