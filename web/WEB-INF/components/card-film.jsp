@@ -48,12 +48,12 @@
                       
                     <jsp:include page="${cardFilmComponent.svgImgLike}">
                         <jsp:param name="rotate" value="" />
-                        <jsp:param name="likesUnlikes" value="${param.likes}" />
+                        <jsp:param name="likesDislikes" value="${param.likes}" />
                     </jsp:include>
                     
                     <jsp:include page="${cardFilmComponent.svgImgLike}">
                         <jsp:param name="rotate" value="rotate-180" />
-                        <jsp:param name="likesUnlikes" value="${param.unlikes}" />
+                        <jsp:param name="likesDislikes" value="${param.dislikes}" />
                     </jsp:include>
                     
                 </div>
