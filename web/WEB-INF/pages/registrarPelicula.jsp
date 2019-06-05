@@ -46,6 +46,20 @@
     <t:mainContentTemplate>
 
         <t:mainCardTemplate cardTitle="Registrar pelicula">
+            
+            <%-- alert message --%>    
+            <c:if 
+                test="${not empty success}" 
+                var="isSuccess" 
+                scope="request"
+                >                     
+                <jsp:include page="${component.alertMessage}">
+                    <jsp:param name="isSuccess" value="true" />
+                    <jsp:param name="entidad" value="pelicula" />
+                    <jsp:param name="accion" value="registrada" />
+                </jsp:include>
+            </c:if>
+            
             <form action="registrarPelicula" method="POST" enctype="multipart/form-data">                       
 
                 <%-- formGroups --%>
@@ -101,19 +115,7 @@
                 </jsp:include> 
 
             </form>
-
-            <%-- alert message --%>    
-            <c:if 
-                test="${not empty success}" 
-                var="isSuccess" 
-                scope="request"
-                >                     
-                <jsp:include page="${component.alertMessage}">
-                    <jsp:param name="isSuccess" value="true" />
-                    <jsp:param name="entidad" value="pelicula" />
-                    <jsp:param name="accion" value="registrada" />
-                </jsp:include>
-            </c:if>
+            
         </t:mainCardTemplate> 
 
     </t:mainContentTemplate>  

@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utils.MultipartResolver;
 
 /**
  *
@@ -35,9 +36,14 @@ public class EliminarPeliculaControlador extends HttpServlet {
         IPeliculaDAO iPeliculaDAO = subFabrica.getPeliculaDAO();
 
         try {
-            iPeliculaDAO.eliminar(id);
-            request.setAttribute("peliculas", iPeliculaDAO.getAll());
-            request.setAttribute("success", true);
+            String peliculaImageNameToDelete = iPeliculaDAO.getById(id).getImagen();
+            boolean isPeliculaDeleted = iPeliculaDAO.eliminar(id);
+            
+            if (isPeliculaDeleted) {
+                MultipartResolver.deleteFileInServer(peliculaImageNameToDelete);
+                request.setAttribute("peliculas", iPeliculaDAO.getAll());
+                request.setAttribute("success", true);
+            }
         } catch (Exception ex) {
             request.setAttribute("success", false);
             Logger.getLogger(EliminarPeliculaControlador.class.getName()).log(Level.SEVERE, null, ex);
