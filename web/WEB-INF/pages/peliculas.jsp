@@ -77,8 +77,5 @@
             baseUrl = [location.protocol, '//', location.host, location.pathname].join('')
             window.history.replaceState({}, "", "peliculas")
         }         
-        
-        assignTextToLabel()
-        assignValueToSelect()
     })
 </script>
