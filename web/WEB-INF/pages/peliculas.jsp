@@ -16,7 +16,8 @@
 
     component.put("buttonFloat", "/WEB-INF/components/button-float.jsp");
     component.put("cardFilm", "/WEB-INF/components/card-film.jsp");
-
+    component.put("alertMessage", "../components/alert-message.jsp");
+    
     // setting component attribute as pageContext
     request.setAttribute("component", component);
 %>
@@ -29,6 +30,19 @@
     <t:mainContentTemplate>
 
         <t:mainCardTemplate cardTitle="Películas"> 
+            
+            <%-- alert message --%>    
+            <c:if 
+                test="${not empty success}" 
+                var="isSuccess" 
+                scope="request"
+                >                     
+                <jsp:include page="${component.alertMessage}">
+                    <jsp:param name="isSuccess" value="true" />
+                    <jsp:param name="entidad" value="pelicula" />
+                    <jsp:param name="accion" value="eliminada" />
+                </jsp:include>
+            </c:if>
                 
             <c:forEach var="pelicula" items="${peliculas}">
                 
@@ -56,3 +70,15 @@
     </jsp:include>
     
 </t:baseTemplate>
+
+<script>
+    $(document).ready(() => {
+        if (!window.location.search) {
+            baseUrl = [location.protocol, '//', location.host, location.pathname].join('')
+            window.history.replaceState({}, "", "peliculas")
+        }         
+        
+        assignTextToLabel()
+        assignValueToSelect()
+    })
+</script>
