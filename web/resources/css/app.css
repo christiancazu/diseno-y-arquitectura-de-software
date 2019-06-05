@@ -71,6 +71,12 @@
     cursor: pointer;
 }
 
+.rating-num { margin-top:0px;font-size: 54px; }
+.progress { margin-bottom: 5px;}
+.progress-bar { text-align: left; }
+.rating-desc .col-md-3 {padding-right: 0px;}
+.sr-only { margin-left: 5px;overflow: visible;clip: auto; }
+
 @media screen and (min-width: 768px) {
     .card-img {
         max-height: 160px;
