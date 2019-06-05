@@ -7,7 +7,7 @@
 
 <div class="form-group">
     <label for="">${param.label}</label>
-    <select class="form-control" name="genero" required>
+    <select id="select" class="form-control" name="genero" required>
         <option value="" selected disabled hidden>Elija una opción</option>
         <c:forEach var="option" items="${options}">
             <option value="${option.getId()}">

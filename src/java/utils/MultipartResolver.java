@@ -10,6 +10,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
@@ -43,21 +44,25 @@ public class MultipartResolver {
                     if (item.isFormField()) {
                         assignFormFieldsToObject(item);
                     } else {
-                        pelicula.setImagen(fileNameGenerator(item.getName()));
-                        requestResolved.put("file", (FileItem) item);
+                        if (item.getString().isEmpty()) {
+                            pelicula.setImagen(null);
+                            requestResolved.put("file", null);
+                        } else {
+                            pelicula.setImagen(fileNameGenerator(item.getName()));
+                            requestResolved.put("file", (FileItem) item);
+                        }
                         break;
                     }
                 }
                 requestResolved.put("pelicula", pelicula);
-            } catch (Exception e) {
+            } catch (FileUploadException e) {
                 throw e;
             }
         }
         return requestResolved;
     }
 
-    public static boolean saveFileInServer(FileItem file, String fileName)
-            throws Exception {
+    public static boolean saveFileInServer(FileItem file, String fileName) throws Exception {
         boolean isFileSaved = false;
 
         try {
@@ -66,19 +71,39 @@ public class MultipartResolver {
             if (!path.exists()) {
                 path.mkdirs();
             }
-
             File uploadedFile = new File(path + "/" + fileName);
             file.write(uploadedFile);
             isFileSaved = true;
-
         } catch (Exception e) {
             throw e;
         }
         return isFileSaved;
     }
+    
+    public static boolean deleteFileInServer(String fileName) {
+        boolean isFileDeleted = false;
+
+        try {
+            File path = new File(PATH_IMAGE);
+
+            if (!path.exists()) {
+                path.mkdirs();
+            }
+            File uploadedFile = new File(path + "/" + fileName);
+            uploadedFile.delete();
+            
+            isFileDeleted = true;
+        } catch (Exception e) {
+            throw e;
+        }
+        return isFileDeleted;
+    }
 
     private static void assignFormFieldsToObject(FileItem fileItem) {
         switch (fileItem.getFieldName()) {
+            case "id":
+                pelicula.setId(Integer.parseInt(fileItem.getString()));
+                break;
             case "nombre":
                 pelicula.setNombre(fileItem.getString());
                 break;
@@ -98,5 +123,4 @@ public class MultipartResolver {
         // ex: PATH_IMAGE/2019876545221.jpg
         return dateFormat.format(date) + "." + FilenameUtils.getExtension(originalFileName);
     }
-
 }

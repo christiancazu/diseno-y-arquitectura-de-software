@@ -121,18 +121,28 @@ public class MySQLPeliculaDAO extends MySQLDBConexion implements IPeliculaDAO {
             
             String sql =
                     "UPDATE " + PELICULA +
-                    " SET nombre = ?, descripcion = ?, imagen = ?, genero = ?" +
-                    " WHERE id = ?";           
+                    " SET nombre = ?, descripcion = ?, genero = ?" +                    
+                    " WHERE id = ?";  
             
+            if(pelicula.getImagen() != null) {
+                sql =
+                    "UPDATE " + PELICULA +
+                    " SET nombre = ?, descripcion = ?, genero = ?, imagen = ?" +                    
+                    " WHERE id = ?";
+            }                        
             PreparedStatement pstm = this.connection.prepareStatement(sql);
             
             pstm.setString(1, pelicula.getNombre());
             pstm.setString(2, pelicula.getDescripcion());
-            pstm.setString(3, pelicula.getImagen());            
-            pstm.setInt(4, pelicula.getGenero().getId());
-            pstm.setInt(5, pelicula.getId());
-            
-            resultado = pstm.executeUpdate();
+            pstm.setInt(3, pelicula.getGenero().getId());
+                    
+            if(pelicula.getImagen() != null) {
+                pstm.setString(4, pelicula.getImagen());
+                pstm.setInt(5, pelicula.getId());
+            } else {
+                pstm.setInt(4, pelicula.getId());
+            }            
+            resultado = pstm.executeUpdate();            
         } catch (Exception e) {
             throw e;
         } finally {
