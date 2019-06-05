@@ -1,8 +1,12 @@
 package controladores;
 
+import dao.IEncuestaDAO;
 import dao.IPeliculaDAO;
 import dao.fabrica.DAOFabrica;
+import entidades.Encuesta;
+import entidades.Pelicula;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -10,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utils.GenerateFullPelicula;
 import utils.MultipartResolver;
 
 /**
@@ -34,6 +39,7 @@ public class EliminarPeliculaControlador extends HttpServlet {
         
         DAOFabrica subFabrica = DAOFabrica.getDAOFabrica(DAOFabrica.MYSQL);
         IPeliculaDAO iPeliculaDAO = subFabrica.getPeliculaDAO();
+        IEncuestaDAO iEncuestaDAO = subFabrica.getEncuestaDAO();
 
         try {
             String peliculaImageNameToDelete = iPeliculaDAO.getById(id).getImagen();
@@ -41,7 +47,13 @@ public class EliminarPeliculaControlador extends HttpServlet {
             
             if (isPeliculaDeleted) {
                 MultipartResolver.deleteFileInServer(peliculaImageNameToDelete);
-                request.setAttribute("peliculas", iPeliculaDAO.getAll());
+                
+                List<Pelicula> peliculas = iPeliculaDAO.getAll();
+                List<Encuesta> encuestas = iEncuestaDAO.getAll();
+
+                // assign data: Pelicula, likes, dislikes for each Pelicula
+                request.setAttribute("fullPeliculas", GenerateFullPelicula.assignFullDataToPeliculas(peliculas, encuestas));
+                
                 request.setAttribute("success", true);
             }
         } catch (Exception ex) {

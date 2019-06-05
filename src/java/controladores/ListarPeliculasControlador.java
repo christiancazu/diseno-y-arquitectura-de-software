@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelos.FullPelicula;
+import utils.GenerateFullPelicula;
 
 /**
  *
@@ -45,7 +46,7 @@ public class ListarPeliculasControlador extends HttpServlet {
             List<Encuesta> encuestas = iEncuestaDAO.getAll();
 
             // assign data: Pelicula, likes, dislikes for each Pelicula
-            request.setAttribute("fullPeliculas", assignFullDataToPeliculas(peliculas, encuestas));
+            request.setAttribute("fullPeliculas", GenerateFullPelicula.assignFullDataToPeliculas(peliculas, encuestas));
         } catch (Exception ex) {
             Logger.getLogger(ListarPeliculasControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -53,29 +54,5 @@ public class ListarPeliculasControlador extends HttpServlet {
         request.getRequestDispatcher("WEB-INF/pages/peliculas.jsp").forward(request, response);
     }
 
-    private List<FullPelicula> assignFullDataToPeliculas(List<Pelicula> peliculas, List<Encuesta> encuestas) {
-        List<FullPelicula> fullPeliculas = new ArrayList<>();
-
-        // fill peliculas to List fullPeliculas
-        peliculas.forEach((pelicula) -> {
-            fullPeliculas.add(new FullPelicula(pelicula));
-        });
-
-        // fetching Pelicula depending of id on encuesta.pelicula
-        encuestas.forEach((encuesta) -> {
-            FullPelicula peliculaById = fullPeliculas.stream()
-                    .filter(peliculaFull -> encuesta.getPelicula().getId().equals(peliculaFull.getPelicula().getId()))
-                    .findAny()
-                    .orElse(null);
-
-            // setting vote to each fullPeliculas item
-            if (encuesta.getVoto() == 'S') {
-                fullPeliculas.get(fullPeliculas.indexOf(peliculaById)).addLike();
-            } else {
-                fullPeliculas.get(fullPeliculas.indexOf(peliculaById)).addDislike();
-            }
-        });
-
-        return fullPeliculas;
-    }
+    
 }
