@@ -63,8 +63,8 @@
                     </jsp:include>
 
                     <div>
-                        <input class="d-none" type="radio" name="${param.id}" value="S" required>
-                        <input class="d-none" type="radio" name="${param.id}" value="N">
+                        <input class="hide-radio" type="radio" name="${param.id}" value="S" required>
+                        <input class="hide-radio" type="radio" name="${param.id}" value="N">
                     </div>
 
                 </div>

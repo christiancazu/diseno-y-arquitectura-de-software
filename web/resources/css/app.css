@@ -42,6 +42,7 @@
 .svg-img-like-container {   
     display: inline;    
     margin-right: 1rem;
+    padding: 0 0 1rem;
 }
 
 .svg-img-like {
@@ -59,7 +60,7 @@
   
 .like-counter {
     position: absolute;
-    top: 4px;
+    top: 2px;
 }
 
 .img-preview {
@@ -69,6 +70,13 @@
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+.hide-radio {
+    position: absolute;
+    bottom: 2px;
+    left: 8px;
+    z-index: -1;
 }
 
 .rating-num { margin-top:0px;font-size: 54px; }
