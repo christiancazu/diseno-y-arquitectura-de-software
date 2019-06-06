@@ -23,6 +23,10 @@ public class MultipartResolver {
 
     private static Pelicula pelicula = null;
 
+    // ex: paths
+    // in windows: C:\\...\\diseno-y-arquitectura-de-software\\web\\resources\\images\\peliculas
+    // in linux: /home/.../diseno-y-arquitectura-de-software/web/resources/images/peliculas
+    
     private static final String PATH_IMAGE
             = "/home/ciber/NetBeansProjects/diseno-y-arquitectura-de-software/web/resources/images/peliculas";
 
