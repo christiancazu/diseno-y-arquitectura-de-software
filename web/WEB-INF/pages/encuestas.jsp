@@ -92,7 +92,6 @@
     
     // #TODO: OPTIMIZATION
     $("div[id^=svg-]").click(function () {
-        console.log($(this).attr("data-id"))
         
         idToString = this.id
 

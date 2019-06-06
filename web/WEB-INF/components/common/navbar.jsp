@@ -13,7 +13,7 @@
     
     links.put("peliculas", request.getContextPath());
     links.put("encuestas", "encuestas");
-    links.put("estadísticas", "estadisticas");
+    links.put("estadisticas", "estadisticas");
     
     request.setAttribute("links", links);
 %>
