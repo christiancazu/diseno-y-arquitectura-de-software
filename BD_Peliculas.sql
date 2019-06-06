@@ -91,8 +91,8 @@ INSERT INTO `genero` (`id`, `nombre`) VALUES
 
 CREATE TABLE `pelicula` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL,
-  `descripcion` varchar(100) DEFAULT NULL,
+  `nombre` varchar(64) NOT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
   `imagen` varchar(200) DEFAULT NULL,
   `genero` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
