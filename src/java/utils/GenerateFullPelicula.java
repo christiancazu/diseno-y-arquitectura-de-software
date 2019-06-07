@@ -11,6 +11,17 @@ import modelos.FullPelicula;
  * @author Christian Carrillo Zúñiga
  */
 public class GenerateFullPelicula {
+    
+    /**
+     * Assign to List<FullPelicula> each Pelicula with counted votes:
+     *  Object Pelicula
+     *  int likes
+     *  int dislikes
+     * 
+     * @param peliculas List<Pelicula>
+     * @param encuestas List<Encuesta>
+     * @return list of peliculas with votes in FullPelicula structure
+     */
     public static List<FullPelicula> assignFullDataToPeliculas(List<Pelicula> peliculas, List<Encuesta> encuestas) {
         List<FullPelicula> fullPeliculas = new ArrayList<>();
 

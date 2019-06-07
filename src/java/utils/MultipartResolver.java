@@ -30,6 +30,16 @@ public class MultipartResolver {
     private static final String PATH_IMAGE
             = "/home/ciber/NetBeansProjects/diseno-y-arquitectura-de-software/web/resources/images/peliculas";
 
+    /**
+     * Resolve the request type: enctype="multipart/form-data"
+     * when it comes with some file in request
+     * 
+     * @param   request from servlets 
+     * @return  <code>HashMap<String, Object></code> with this structure:
+     *          {"pelicula", Pelicula}
+     *          {"file", FileItem} 
+     * @throws  Exception 
+     */
     public static HashMap<String, Object> resolveForm(HttpServletRequest request) throws Exception {
 
         HashMap<String, Object> requestResolved = null;
@@ -66,6 +76,14 @@ public class MultipartResolver {
         return requestResolved;
     }
 
+    /**
+     * Save in server the file with the new name provided 
+     * 
+     * @param   file FileItem to save
+     * @param   fileName String name to assign to File
+     * @return  <code>boolean</code> value depending if the file was saved on server
+     * @throws  Exception 
+     */
     public static boolean saveFileInServer(FileItem file, String fileName) throws Exception {
         boolean isFileSaved = false;
 
@@ -84,6 +102,12 @@ public class MultipartResolver {
         return isFileSaved;
     }
     
+    /**
+     * Delete in server the file with the name provided 
+     * 
+     * @param fileName String name to deleted
+     * @return <code>boolean</code> value depending if the file was deleted on server
+     */
     public static boolean deleteFileInServer(String fileName) {
         boolean isFileDeleted = false;
 
@@ -103,6 +127,11 @@ public class MultipartResolver {
         return isFileDeleted;
     }
 
+    /**
+     * Assign parameters to Object Pelicula
+     * 
+     * @param fileItem FileItem to get his FieldName & assign his String to Object Pelicula
+     */
     private static void assignFormFieldsToObject(FileItem fileItem) {
         switch (fileItem.getFieldName()) {
             case "id":
@@ -120,11 +149,17 @@ public class MultipartResolver {
         }
     }
 
+    /**
+     * Generates a new name based on the current SimpleDateFormat 
+     * and is concatenated with his extention 
+     * 
+     * @param originalFileName String original name comes in request
+     * @return <code>String</code> ex: "2019876545221.jpg"
+     */
     private static String fileNameGenerator(String originalFileName) {
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 
-        // ex: PATH_IMAGE/2019876545221.jpg
         return dateFormat.format(date) + "." + FilenameUtils.getExtension(originalFileName);
     }
 }

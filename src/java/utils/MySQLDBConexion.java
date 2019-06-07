@@ -17,6 +17,11 @@ public class MySQLDBConexion {
     private static final String USER = "root";
     private static final String PASSWORD = "";
 
+    /**
+     * getting MySQL connection
+     *
+     * @throws Exception
+     */
     public void getConexion() throws Exception {
         try {
             Class.forName(DRIVER);
@@ -26,6 +31,11 @@ public class MySQLDBConexion {
         }
     }
 
+    /**
+     * closing MySQL connection if is opened
+     *
+     * @throws SQLException
+     */
     public void closeConexion() throws SQLException {
         if (connection != null && !connection.isClosed()) {
             connection.close();
