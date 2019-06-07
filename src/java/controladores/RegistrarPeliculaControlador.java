@@ -23,12 +23,20 @@ import utils.MultipartResolver;
 @WebServlet(name = "RegistrarPeliculaControlador", urlPatterns = {"/registrarPelicula"})
 public class RegistrarPeliculaControlador extends HttpServlet {
 
-    private final DAOFabrica subFabrica;
-    private final IGeneroDAO iGeneroDAO;
+    private DAOFabrica subFabrica;
+    private IGeneroDAO iGeneroDAO;
 
-    public RegistrarPeliculaControlador() {
-        this.subFabrica = DAOFabrica.getDAOFabrica(DAOFabrica.MYSQL);
-        this.iGeneroDAO = subFabrica.getGeneroDAO();
+    /**
+     * servlet objects dao's initialization
+     *
+     * @throws ServletException
+     */
+    @Override
+    public void init() throws ServletException {
+        super.init();
+
+        subFabrica = DAOFabrica.getDAOFabrica(DAOFabrica.MYSQL);
+        iGeneroDAO = subFabrica.getGeneroDAO();
     }
 
     /**
@@ -85,6 +93,6 @@ public class RegistrarPeliculaControlador extends HttpServlet {
             Logger.getLogger(RegistrarPeliculaControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        request.getRequestDispatcher("WEB-INF/pages/registrarPelicula.jsp").forward(request, response);
+        doGet(request, response);
     }
 }
