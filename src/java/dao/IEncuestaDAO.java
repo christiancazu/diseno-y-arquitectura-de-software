@@ -17,6 +17,8 @@ public interface IEncuestaDAO extends ICRUDDAO<Encuesta> {
 
     @Override
     public boolean crear(Encuesta entity) throws Exception;
+    
+    public boolean crearEncuestas(List<Encuesta> encuestas) throws Exception;
 
     @Override
     public boolean actualizar(Encuesta entity) throws Exception;

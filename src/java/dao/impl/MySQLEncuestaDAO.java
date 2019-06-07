@@ -2,7 +2,6 @@ package dao.impl;
 
 import dao.IEncuestaDAO;
 import entidades.Encuesta;
-import entidades.Genero;
 import entidades.Pelicula;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,26 +16,26 @@ import utils.MySQLDBConexion;
 public class MySQLEncuestaDAO extends MySQLDBConexion implements IEncuestaDAO {
 
     private static final String ENCUESTA = "encuesta";
-    
+
     @Override
     public Encuesta getById(int id) throws Exception {
-        Encuesta encuesta = null;   
-                
-        try {           
+        Encuesta encuesta = null;
+
+        try {
             this.getConexion();
-            
-            String sql =
-                    "SELECT *" +
-                    " FROM " + ENCUESTA +
-                    " WHERE id = ?";            
-            
+
+            String sql
+                    = "SELECT *"
+                    + " FROM " + ENCUESTA
+                    + " WHERE id = ?";
+
             PreparedStatement pstm = this.connection.prepareStatement(sql);
             pstm.setInt(1, id);
             ResultSet rs = pstm.executeQuery();
-            
+
             rs.next();
-            
-            encuesta = new Encuesta();            
+
+            encuesta = new Encuesta();
             encuesta.setId(rs.getInt("id"));
             encuesta.setPelicula(getPeliculaById(rs.getInt("pelicula")));
             encuesta.setVoto(rs.getString("voto").charAt(0));
@@ -51,25 +50,25 @@ public class MySQLEncuestaDAO extends MySQLDBConexion implements IEncuestaDAO {
 
     @Override
     public List<Encuesta> getAll() throws Exception {
-        List<Encuesta> encuestas = null;   
-                
-        try {           
+        List<Encuesta> encuestas = null;
+
+        try {
             this.getConexion();
-            
-            String sql = "SELECT * FROM " + ENCUESTA;            
-            
+
+            String sql = "SELECT * FROM " + ENCUESTA;
+
             PreparedStatement pstm = this.connection.prepareStatement(sql);
             ResultSet rs = pstm.executeQuery();
-            
+
             encuestas = new ArrayList<>();
-            
+
             while (rs.next()) {
-                Encuesta encuesta = new Encuesta();           
+                Encuesta encuesta = new Encuesta();
                 encuesta.setId(rs.getInt("id"));
                 encuesta.setPelicula(getPeliculaById(rs.getInt("pelicula")));
                 encuesta.setVoto(rs.getString("voto").charAt(0));
                 encuestas.add(encuesta);
-            }    
+            }
 
         } catch (Exception e) {
             throw e;
@@ -82,48 +81,19 @@ public class MySQLEncuestaDAO extends MySQLDBConexion implements IEncuestaDAO {
 
     @Override
     public boolean crear(Encuesta encuesta) throws Exception {
-        int resultado = 0;   
-                
-        try {           
-            this.getConexion();
-            
-            String sql =
-                    "INSERT INTO " + ENCUESTA + 
-                    " VALUES(null, ?, ?)";           
-            
-            PreparedStatement pstm = this.connection.prepareStatement(sql);
-            
-            pstm.setInt(1, encuesta.getPelicula().getId());
-            pstm.setString(2, String.valueOf(encuesta.getVoto()));
-            
-            resultado = pstm.executeUpdate();            
-        } catch (Exception e) {
-            throw e;
-        } finally {
-            this.closeConexion();
-        }
-
-        return resultado == 1;
-    }
-
-    @Override
-    public boolean actualizar(Encuesta encuesta) throws Exception {
         int resultado = 0;
-                
-        try {           
+
+        try {
             this.getConexion();
-            
-            String sql =
-                    "UPDATE " + ENCUESTA +
-                    " SET pelicula = ?, voto = ?" +
-                    " WHERE id = ?";           
-            
+
+            String sql
+                    = "INSERT INTO " + ENCUESTA
+                    + " VALUES(null, ?, ?)";
+
             PreparedStatement pstm = this.connection.prepareStatement(sql);
-            
             pstm.setInt(1, encuesta.getPelicula().getId());
             pstm.setString(2, String.valueOf(encuesta.getVoto()));
-            pstm.setInt(3, encuesta.getId());
-            
+
             resultado = pstm.executeUpdate();
         } catch (Exception e) {
             throw e;
@@ -135,21 +105,57 @@ public class MySQLEncuestaDAO extends MySQLDBConexion implements IEncuestaDAO {
     }
 
     @Override
-    public boolean eliminar(int id) throws Exception { 
-        int resultado = 0;
-        
-        try {           
+    public boolean crearEncuestas(List<Encuesta> encuestas) throws Exception, NullPointerException {
+        boolean crearEncuestas = false;
+
+        try {
             this.getConexion();
-            
-            String sql =
-                    "DELETE FROM " + ENCUESTA +
-                    " WHERE id = ?";            
-            
+
+            String sql
+                    = "INSERT INTO " + ENCUESTA
+                    + " VALUES(null, ?, ?)";
+
+            connection.setAutoCommit(false);
+
             PreparedStatement pstm = this.connection.prepareStatement(sql);
-                        
-            pstm.setInt(1, id);
-            
-            resultado = pstm.executeUpdate();           
+
+            for (Encuesta encuesta : encuestas) {
+                pstm.setInt(1, encuesta.getPelicula().getId());
+                pstm.setString(2, String.valueOf(encuesta.getVoto()));
+                pstm.addBatch();
+                pstm.clearParameters();
+            }
+            pstm.executeBatch();
+            connection.commit();
+
+            crearEncuestas = true;
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.closeConexion();
+        }
+
+        return crearEncuestas;
+    }
+
+    @Override
+    public boolean actualizar(Encuesta encuesta) throws Exception {
+        int resultado = 0;
+
+        try {
+            this.getConexion();
+
+            String sql
+                    = "UPDATE " + ENCUESTA
+                    + " SET pelicula = ?, voto = ?"
+                    + " WHERE id = ?";
+
+            PreparedStatement pstm = this.connection.prepareStatement(sql);
+            pstm.setInt(1, encuesta.getPelicula().getId());
+            pstm.setString(2, String.valueOf(encuesta.getVoto()));
+            pstm.setInt(3, encuesta.getId());
+
+            resultado = pstm.executeUpdate();
         } catch (Exception e) {
             throw e;
         } finally {
@@ -157,11 +163,35 @@ public class MySQLEncuestaDAO extends MySQLDBConexion implements IEncuestaDAO {
         }
 
         return resultado == 1;
-    } 
-    
-    private Pelicula getPeliculaById(int id) throws Exception {     
-        MySQLPeliculaDAO mySQLPeliculaDAO = new MySQLPeliculaDAO(); 
-        
+    }
+
+    @Override
+    public boolean eliminar(int id) throws Exception {
+        int resultado = 0;
+
+        try {
+            this.getConexion();
+
+            String sql
+                    = "DELETE FROM " + ENCUESTA
+                    + " WHERE id = ?";
+
+            PreparedStatement pstm = this.connection.prepareStatement(sql);
+            pstm.setInt(1, id);
+
+            resultado = pstm.executeUpdate();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.closeConexion();
+        }
+
+        return resultado == 1;
+    }
+
+    private Pelicula getPeliculaById(int id) throws Exception {
+        MySQLPeliculaDAO mySQLPeliculaDAO = new MySQLPeliculaDAO();
+
         return mySQLPeliculaDAO.getById(id);
     }
 }

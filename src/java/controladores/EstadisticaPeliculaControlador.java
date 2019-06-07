@@ -41,7 +41,7 @@ public class EstadisticaPeliculaControlador extends HttpServlet {
             List<Pelicula> peliculas = iPeliculaDAO.getAll();
             List<Encuesta> encuestas = iEncuestaDAO.getAll();
 
-            // assign data: Pelicula, likes, dislikes for each Pelicula
+            // assign data: Pelicula, likes, dislikes for each Pelicula in FullPelicula structure
             request.setAttribute("fullPeliculas", GenerateFullPelicula.assignFullDataToPeliculas(peliculas, encuestas));
         } catch (Exception ex) {
             Logger.getLogger(ListarPeliculasControlador.class.getName()).log(Level.SEVERE, null, ex);
