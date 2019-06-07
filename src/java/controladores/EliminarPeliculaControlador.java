@@ -63,6 +63,7 @@ public class EliminarPeliculaControlador extends HttpServlet {
         }
 
         ListarPeliculasControlador lpc = new ListarPeliculasControlador();
+        lpc.init();
         lpc.doGet(request, response);
     }
 }
