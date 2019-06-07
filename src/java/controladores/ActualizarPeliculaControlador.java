@@ -23,15 +23,23 @@ import utils.MultipartResolver;
 @WebServlet(name = "ActualizarPeliculaControlador", urlPatterns = {"/actualizarPelicula"})
 public class ActualizarPeliculaControlador extends HttpServlet {
 
-    private final DAOFabrica subFabrica;
-    private final IGeneroDAO iGeneroDAO;
-    private final IPeliculaDAO iPeliculaDAO;
+    private DAOFabrica subFabrica;
+    private IGeneroDAO iGeneroDAO;
+    private IPeliculaDAO iPeliculaDAO;
     private Pelicula currentPelicula = null;
 
-    public ActualizarPeliculaControlador() {
-        this.subFabrica = DAOFabrica.getDAOFabrica(DAOFabrica.MYSQL);
-        this.iGeneroDAO = subFabrica.getGeneroDAO();
-        this.iPeliculaDAO = subFabrica.getPeliculaDAO();
+    /**
+     * servlet objects dao's initialization
+     *
+     * @throws ServletException
+     */
+    @Override
+    public void init() throws ServletException {
+        super.init();
+
+        subFabrica = DAOFabrica.getDAOFabrica(DAOFabrica.MYSQL);
+        iGeneroDAO = subFabrica.getGeneroDAO();
+        iPeliculaDAO = subFabrica.getPeliculaDAO();
     }
 
     /**
@@ -49,11 +57,8 @@ public class ActualizarPeliculaControlador extends HttpServlet {
 
         try {
             currentPelicula = iPeliculaDAO.getById(idPelicula);
-            
-            request.setAttribute("pelicula", currentPelicula);
-            request.setAttribute("generos", iGeneroDAO.getAll());
 
-            request.getRequestDispatcher("/WEB-INF/pages/actualizarPelicula.jsp").forward(request, response);
+            setContextToRequest(request, response, currentPelicula);
         } catch (Exception ex) {
             Logger.getLogger(ActualizarPeliculaControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -78,28 +83,50 @@ public class ActualizarPeliculaControlador extends HttpServlet {
             FileItem fileResolved = (FileItem) requestResolved.get("file");
 
             if (requestResolved != null) {
-                IPeliculaDAO iPeliculaDAO = subFabrica.getPeliculaDAO();
-                
                 boolean isPeliculaRegistered = iPeliculaDAO.actualizar(peliculaResolved);
 
                 if (isPeliculaRegistered && fileResolved != null) {
                     MultipartResolver.saveFileInServer(fileResolved, peliculaResolved.getImagen());
                     MultipartResolver.deleteFileInServer(currentPelicula.getImagen());
 
-                    // forcing delay to load well the new image path in frontend
                     makeDelay(2000);
                 }
-                request.setAttribute("success", true);                
-                request.setAttribute("pelicula", iPeliculaDAO.getById(currentPelicula.getId()));
-                request.setAttribute("generos", iGeneroDAO.getAll());
+                request.setAttribute("success", true);
             }
         } catch (Exception ex) {
             request.setAttribute("success", false);
-            Logger.getLogger(RegistrarPeliculaControlador.class.getName()).log(Level.SEVERE, null, ex);
-        }  
-        request.getRequestDispatcher("/WEB-INF/pages/actualizarPelicula.jsp").forward(request, response);
+            Logger.getLogger(ActualizarPeliculaControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            setContextToRequest(request, response, iPeliculaDAO.getById(currentPelicula.getId()));
+        } catch (Exception ex) {
+            Logger.getLogger(ActualizarPeliculaControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
+    /**
+     * set Pelicula & List<Encuesta> to the view 
+     * 
+     * @param request
+     * @param response
+     * @param Pelicula asked in parameter request
+     * @throws Exception 
+     */
+    private void setContextToRequest(HttpServletRequest request, HttpServletResponse response, Pelicula pelicula)
+            throws Exception {
+
+        request.setAttribute("pelicula", pelicula);
+        request.setAttribute("generos", iGeneroDAO.getAll());
+
+        request.getRequestDispatcher("WEB-INF/pages/actualizarPelicula.jsp").forward(request, response);
+    }
+
+    /**
+     * forcing delay to load well the new image path in frontend
+     *
+     * @param delayTime
+     * @throws InterruptedException
+     */
     private void makeDelay(int delayTime) throws InterruptedException {
         Thread.sleep(delayTime);
     }
