@@ -12,8 +12,8 @@
     Map<String, String> links = new LinkedHashMap();
     
     links.put("peliculas", request.getContextPath());
-    links.put("encuestas", "encuestas");
-    links.put("estadisticas", "estadisticas");
+    links.put("encuestas", "peliculas/encuestas");
+    links.put("estadisticas", "peliculas/estadisticas");
     
     request.setAttribute("links", links);
 %>

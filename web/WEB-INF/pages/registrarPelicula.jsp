@@ -60,7 +60,7 @@
                 </jsp:include>
             </c:if>
             
-            <form action="registrarPelicula" method="POST" enctype="multipart/form-data">                       
+            <form action="peliculas/registrar" method="POST" enctype="multipart/form-data">                       
 
                 <%-- formGroups --%>
                 <c:forEach var="formGroup" items="${formGroups}">
@@ -123,6 +123,14 @@
 </t:baseTemplate>
 
 <script>
+    $(document).ready(() => {
+        pathNameFixed = location.pathname.replace(/\/peliculas\/peliculas/, '/peliculas')
+        if (!window.location.search) {
+            baseUrl = [location.protocol, '//', location.host, pathNameFixed].join('')
+            window.history.replaceState({}, "", baseUrl)
+        }        
+    })
+    
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();

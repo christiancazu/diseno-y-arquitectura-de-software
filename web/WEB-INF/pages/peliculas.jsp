@@ -65,7 +65,7 @@
 
     <%-- button float --%>
     <jsp:include page="${component.buttonFloat}">
-        <jsp:param name="path" value="registrarPelicula" />
+        <jsp:param name="path" value="peliculas/registrar" />
         <jsp:param name="btnName" value="Registrar" />
     </jsp:include>
     
