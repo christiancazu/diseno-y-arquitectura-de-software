@@ -23,6 +23,9 @@ public abstract class PeliculaAccion {
                 case "/peliculas/registrar":
                 case "/registrar":
                     return new RegistrarPeliculaAccion(request);
+                case "/peliculas/actualizar":
+                case "/actualizar":
+                    return new ActualizarPeliculaAccion(request);
             }
         }
         return null;

@@ -23,9 +23,9 @@
     List<FormActionButton> formActionButtons = new ArrayList();
     
     formActionButtons.add(new FormActionButton(
-            "actualizarPelicula", "GET", "", "primary", "Actualizar"));
+            "peliculas/actualizar", "GET", "", "primary", "Actualizar"));
     formActionButtons.add(new FormActionButton(
-            "eliminarPelicula", "POST", "", "danger", "Eliminar"));
+            "peliculas/eliminar", "POST", "", "danger", "Eliminar"));
     
     // setting formActionButtons attribute as pageContext
     request.setAttribute("formActionButtons", formActionButtons);

@@ -50,7 +50,7 @@
     <t:mainContentTemplate>
 
         <t:mainCardTemplate cardTitle="Actualizar pelicula">
-            <form action="actualizarPelicula" method="POST" enctype="multipart/form-data">                       
+            <form action="peliculas/actualizar" method="POST" enctype="multipart/form-data">                       
 
                 <input id="id-pelicupa" type="hidden" name="id" value="${pelicula.getId()}">
                 
@@ -133,11 +133,11 @@
 
 <script>
     $(document).ready(() => {
+        pathNameFixed = location.pathname.replace(/\/peliculas\/peliculas/, '/peliculas')
         if (!window.location.search) {
-            baseUrl = [location.protocol, '//', location.host, location.pathname].join('')
+            baseUrl = [location.protocol, '//', location.host, pathNameFixed].join('')
             window.history.replaceState({}, "", baseUrl + "?id=" + $('#id-pelicupa').val())
-        }         
-        
+        }        
         assignTextToLabel()
         assignValueToSelect()
     })
@@ -155,7 +155,7 @@
 
     $("#img-input").change(function () {
         readURL(this);
-        asignTextToLabel()
+        assignTextToLabel()
     })
     
     function assignValueToSelect() {
