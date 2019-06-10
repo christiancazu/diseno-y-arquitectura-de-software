@@ -1,9 +1,10 @@
 # __Universidad Tecnológica del Perú__
 
-### peliculas
+### peliculas-OCP
 
-* Práctica calificada 2.
 * Proyecto web con arquitectura MVC usando: Patron-DAO-Factory-DTO.
+* Aplicando Open Close Principle (OCP) en servlets
+* Fork de __[peliculas](https://github.com/christiancazu/diseno-y-arquitectura-de-software/tree/peliculas)__
 
 Librerias 
 * para manipulación de Files:
