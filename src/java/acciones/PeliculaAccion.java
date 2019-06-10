@@ -26,8 +26,11 @@ public abstract class PeliculaAccion {
                 case "/peliculas/actualizar":
                 case "/actualizar":
                     return new ActualizarPeliculaAccion(request);
+                case "/eliminar":
+                    return new EliminarPeliculaAccion(request);
             }
         }
         return null;
     }
 }
+

@@ -73,9 +73,10 @@
 
 <script>
     $(document).ready(() => {
+        pathNameFixed = location.pathname.replace(/\/peliculas\/eliminar/, '/peliculas')
         if (!window.location.search) {
-            baseUrl = [location.protocol, '//', location.host, location.pathname].join('')
-            window.history.replaceState({}, "", "peliculas")
-        }         
+            baseUrl = [location.protocol, '//', location.host, pathNameFixed].join('')
+            window.history.replaceState({}, "", baseUrl)
+        }        
     })
 </script>
