@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import modelos.FullPelicula;
 import utils.GenerateFullPelicula;
 
@@ -37,8 +36,10 @@ public class ListarEncuestasAccion extends EncuestaAccion {
     
     @Override
     public RequestDispatcher ejecutar() {
+        System.out.println("request.getMethod() " + request.getMethod());
         switch (request.getMethod()) {
             case "GET":
+            case "POST":
                 methodGet();
                 break;
         }

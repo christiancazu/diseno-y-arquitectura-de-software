@@ -46,7 +46,7 @@
                 </jsp:include>
             </c:if>
             
-            <form action="encuestas" method="POST">                 
+            <form action="encuestas/registrar" method="POST">                 
 
                 <c:forEach var="fullPelicula" items="${fullPeliculas}">
 
@@ -84,10 +84,11 @@
 
 <script>
     $(document).ready(() => {
+        pathNameFixed = location.pathname.replace(/\/encuestas\/registrar/, '/encuestas')
         if (!window.location.search) {
-            baseUrl = [location.protocol, '//', location.host, location.pathname].join('')
-            window.history.replaceState({}, "", "encuestas")
-        }         
+            baseUrl = [location.protocol, '//', location.host, pathNameFixed].join('')
+            window.history.replaceState({}, "", baseUrl)
+        } 
     })
     
     // #TODO: OPTIMIZATION
