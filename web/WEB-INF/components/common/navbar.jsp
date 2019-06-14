@@ -50,9 +50,9 @@
                         builder
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown-builder">
-                        <a class="dropdown-item" href="builder/presentacion">Presentación</a>
+                        <a class="dropdown-item" href="<%= request.getContextPath()%>/builder/presentacion">Presentación</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="builder/demo">Demo</a>
+                        <a class="dropdown-item" href="<%= request.getContextPath()%>/builder/demo">Demo</a>
                     </div>
                 </li>
                 
@@ -61,9 +61,9 @@
                         visitor
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown-visitor">
-                        <a class="dropdown-item" href="visitor/presentacion">Presentación</a>
+                        <a class="dropdown-item" href="<%= request.getContextPath()%>/visitor/presentacion">Presentación</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="visitor/presentacion">Demo</a>
+                        <a class="dropdown-item" href="<%= request.getContextPath()%>/visitor/demo">Demo</a>
                     </div>
                 </li>
 

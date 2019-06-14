@@ -1,11 +1,6 @@
 <%-- 
-    Document   : builderPresentacion
-    Created on : Jun 14, 2019, 3:14:58 AM
-    Author     : Christian Carrillo Zúñiga
---%>
-<%-- 
-    Document   : index
-    Created on : Jun 13, 2019, 11:31:22 PM
+    Document   : visitorPresentacion
+    Created on : Jun 14, 2019, 5:33:49 AM
     Author     : Christian Carrillo Zúñiga
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -26,7 +21,7 @@
                 <div class="container">
 
                     <header class="section-header">
-                        <h3>Builder</h3>
+                        <h3>Visitor</h3>
                     </header>
 
                     <div class="row about-cols mb-5">                        
@@ -38,7 +33,8 @@
                                 </div>
                                 <h2 class="title"><a href="#">CONCEPTO</a></h2>
                                 <h5 class="text-justify p-4">
-                                    Permite la creación de una variedad de objetos complejos desde un objeto fuente, el cual se compone de una variedad de partes que contribuyen individualmente a la creación de cada objeto complejo.
+                                    Busca separar un algoritmo de la estructura	de un objeto. La operación se implementa de forma que no se modifique el código de  las clases sobre las que opera.
+Si un objeto es	el responsable de mantener un cierto tipo de información, entonces es lógico asignarle también la responsabilidad de realizar todas las operaciones necesarias sobre  esa información. La operación se define en cada una de las clases que representan los posibles tipos sobre los que se aplica dicha operación, y por medio	del polimorfismo y la vinculación dinámica se elige en tiempo de ejecución qué versión de la operación se debe ejecutar.
                                 </h5>
                             </div>
                         </div>
@@ -50,7 +46,8 @@
                                 </div>
                                 <h2 class="title"><a href="#">INTENCIÓN</a></h2>
                                 <h5 class="text-justify p-4">
-                                    Abstrae el proceso de creación de un objeto complejo, centralizando dicho proceso en un único punto, de tal forma que el mismo proceso de construcción pueda crear representaciones diferentes.
+                                    Según el libro de GoF este patrón permite añadir funcionalidades a una clase sin tener que modificarla, siendo usado para manejar algoritmos, relaciones y responsabilidades entre objetos.
+                                    <br><br>Así	pues,	nos		resultará		útil		cuando			necesitemos		realizar  operaciones		distintas	y	no	relacionadas	sobre	una		estructura	de  objetos,	aunque	si	lo		utilizamos	y	luego		tenemos	que	modificar  alguna de las clases implicadas, hemos de tener en cuenta que se  produce cierto nivel de acoplamiento entre ellas.
                                 </h5>
                             </div>
                         </div>
@@ -76,12 +73,12 @@
 
                         <div class="col-md-6 box wow bounceInUp" data-wow-delay="0.5s" data-wow-duration="1.4s">
                             <div class="icon"><i class="ion-ios-barcode-outline"></i></div>
-                            <h4 class="title"><a class="text-light text-justify" href="">Cuando se necesite Independizar el algoritmo de creación de un objeto complejo de las partes que constituyen el objeto y cómo se ensamblan entre ellas.</a></h4>
+                            <h4 class="title"><a class="text-light text-justify" href="">Una estructura de objetos contiene muchas clases de objetos  con distintas interfaces y se desea llevar a cabo operaciones  sobre estos objetos que son distintas en cada clase concreta.</a></h4>
                         </div>
 
                         <div class="col-md-6 box wow bounceInUp" data-wow-delay="1s" data-wow-duration="1.9s">
                             <div class="icon"><i class="ion-ios-barcode-outline"></i></div>
-                            <h4 class="title"><a class="text-light text-justify" href="">Cuando el proceso de construcción permita distintas representaciones para el objeto construido, de manera dinámica.</a></h4>
+                            <h4 class="title"><a class="text-light text-justify" href="">Se quieren llevar a cabo muchas operaciones dispares sobre  objetos	de	una	estructura	de	objetos	sin	tener	que	incluir  dichas operaciones en las clases.</a></h4>
                         </div>
 
                     </div>
@@ -92,12 +89,12 @@
 
                         <div class="col-md-6 box wow bounceInUp" data-wow-delay="1.5s" data-wow-duration="2.4s">
                             <div class="icon"><i class="ion-ios-barcode-outline"></i></div>
-                            <h4 class="title"><a class="text-light text-justify" href="">Se quieren llevar a cabo muchas operaciones dispares sobre objetos de una estructura de objetos sin tener que incluir dichas operaciones en las clases.</a></h4>
+                            <h4 class="title"><a class="text-light text-justify" href="">Las clases que definen la estructura de objetos no cambian,  pero las operaciones que se llevan a cabo sobre ellas.</a></h4>
                         </div>
 
                         <div class="col-md-6 box wow bounceInUp" data-wow-delay="2s" data-wow-duration="2.9s">
                             <div class="icon"><i class="ion-ios-barcode-outline"></i></div>
-                            <h4 class="title"><a class="text-light text-justify" href="">Se quieren llevar a cabo muchas operaciones dispares sobre objetos de una estructura de objetos sin tener que incluir dichas operaciones en las clases.</a></h4>
+                            <h4 class="title"><a class="text-light text-justify" href="">A medida que estas operaciones crecen, el número de operaciones que deberá tener la estructura también crecerá haciendo que administrar la estructura sea muy complejo.</a></h4>
                         </div>
 
                     </div>
@@ -105,8 +102,7 @@
 
                 <div class="container text-center wow bounceInUp my-4" data-wow-delay="3s" data-wow-duration="3.9s">
                     <h3>Además</h3>
-                    <h5 class="text-light">Dado que este patrón separa un algoritmo de la estructura de un objeto, es ampliamente utilizado en intérpretes, compiladores y procesadores de lenguajes, en general.
-                        Se debe utilizar este patrón si se quiere realizar un cierto número de operaciones, que no están relacionadas entre sí, sobre instancias de un conjunto de clases, y no se quiere "contaminar" a dichas clases.</h5>
+                    <h5 class="text-light">El patrón Visitor propone una solución a este problema. Pretende independizar las clases de las operaciones que se ejecutan sobre ellas.</h5>
 
                 </div>                
 
@@ -122,32 +118,41 @@
                         <h3>Diagrama de Clases</h3>
                     </header>
 
-                    <div class="row counters">                        
+                    <div class="row counters justify-content-center">                        
 
                         <div class="col-lg-3 col-6">
-                            <h6 class="text-success text-center"><strong>Producto</strong></h6>
-                            <p>Representa el objeto complejo a construir.</p>
+                            <h6 class="text-success text-center"><strong>Cliente</strong></h6>
+                            <p>Componente que interactúa con la estructura (element) y con el Visitante, éste es responsable de crear los visitantes y enviarlos al elemento para su procesamiento.</p>
                         </div> 
 
-                        <div class="col-lg-3 col-6">
-                            <h6 class="text-success text-center"><strong>Builder</strong></h6>
-                            <p>Especifica una interface abstracta para la creación de las partes del producto. Declara las operaciones necesarias para crear las partes de un objeto concreto.</p>
+                        <div class="col-lg-2 col-6">
+                            <h6 class="text-success text-center"><strong>Element</strong></h6>
+                            <p>Representa la raíz de la estructura, en forma de árbol, sobre la que utilizaremos el Visitante. Este objeto por lo general es una interface que define el método accept y deberán implementar todos los objetos de la estructura.</p>
                         </div>
 
-                        <div class="col-lg-3 col-6">
-                            <h6 class="text-success text-center"><strong>ConcreteBuilder</strong></h6>
-                            <p>Implementa builder y ensambla las partes que constituyen el objeto complejo.</p>
+                        <div class="col-lg-2 col-6">
+                            <h6 class="text-success text-center"><strong>ConcreteElement</strong></h6>
+                            <p>Representa un hijo de la estructura compuesta, la estructura completa puede estar compuesta de un gran número de estos objetos y cada uno deberá implementar el método accept.</p>
                         </div>
 
+                        <div class="col-lg-2 col-6">
+                            <h6 class="text-success text-center"><strong>IVisitor</strong></h6>
+                            <p>Interface que define la estructura del visitante, la interface deberá tener un método por cada objeto que se requiera analizar de la estructura (element).</p>
+                        </div>
+                        
                         <div class="col-lg-3 col-6">
-                            <h6 class="text-success text-center"><strong>Director</strong></h6>
-                            <p>Construye un objeto usando la interfaz builder. Sólo debería ser necesario especificar su tipo y así reutilizar el mismo proceso para distintos tipos.</p>
+                            <h6 class="text-success text-center"><strong>ConcreteVisitor</strong></h6>
+                            <p>Representa una implementación del visitante, esta implementación puede realizar una operación sobre el element. Es posible tener todos los ConcreteVisitor necesarios para realizar las operaciones que necesitemos.</p>
                         </div>
 
                     </div>
 
                     <div class="facts-img">
-                        <img src="<c:url value="/resources/img/builder-diagrama1.jpg"/>" alt="" class="img-diagrama">
+                        <img src="<c:url value="/resources/img/visitor-diagram.png"/>" alt="" class="img-diagrama">
+                    </div>
+                    
+                    <div class="facts-img">
+                        <img src="<c:url value="/resources/img/visitor-sequence.png"/>" alt="" class="img-diagrama">
                     </div>
 
                 </div>
@@ -157,10 +162,9 @@
               Clients Section
             ============================-->
             <section id="testimonials" class="section-bg wow fadeInUp">
-                <div class="container">
-
+                <div class="container">                            
                     <header class="section-header">
-                        <a class="cta-btn" href="<c:url value="/builder/demo"/>"><h3>Demo</h3></a>
+                        <a class="cta-btn" href="<c:url value="/visitor/demo"/>"><h3>Demo</h3></a>
                     </header>
 
                 </div>
@@ -174,5 +178,5 @@
 
 <script>
     $("#main-content").removeClass("col-lg-8")
-    $("#nav-builder").addClass("active")
+    $("#nav-visitor").addClass("active")
 </script>

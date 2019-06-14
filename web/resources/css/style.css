@@ -1585,10 +1585,12 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .img-fluid {
+    margin-top: 16px;
     max-height: 120px;    
 }
 
 .img-diagrama {
     min-height: 60vh;
+    max-width: 70vw;
     margin-bottom: 48px;
 }
