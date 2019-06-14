@@ -9,9 +9,9 @@
 %>
 
 <%@attribute name="cardTitle" required="true" %>
-<%@attribute name="cardBg" %>
+<%@attribute name="cardCustom" %>
 
-<div class="card">
+<div class="card ${cardCustom}">
     <div class="card-header">
         <h4 class="card-title text-center">${cardTitle}</h4>
     </div>
@@ -20,5 +20,4 @@
         <jsp:doBody />
 
     </div>
-</div>
-        
+</div>        

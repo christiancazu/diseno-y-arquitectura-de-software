@@ -16,6 +16,16 @@
     max-height: 32px;
 }
 
+.img-body-bg {
+    /* min-height: 100v; */
+    background-color: tomato;
+    background: url(../images/development.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 .main-content {
     margin: 64px 0;
 }
@@ -96,4 +106,10 @@
         max-width: 400px;
         max-height: 480px;
     }
+}
+
+.card-index {
+    background-color: rgba(0, 0, 0, .35) !important;
+    color: white;
+    margin-top: 120px;
 }
