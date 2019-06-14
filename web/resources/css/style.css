@@ -644,7 +644,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 --------------------------------*/
 
 #about {
-  background: url("../img/about-bg.jpg") center top no-repeat fixed;
+  background: url("../img/2agepg2y2zb560ro2kcu.jpeg") center top no-repeat fixed;
   background-size: cover;
   padding: 60px 0 40px 0;
   position: relative;
@@ -1093,6 +1093,9 @@ body.mobile-nav-active #mobile-nav-toggle {
 --------------------------------*/
 
 #testimonials {
+  
+  margin-top: 240px;
+    
   padding: 60px 0;
 }
 
@@ -1579,4 +1582,13 @@ body.mobile-nav-active #mobile-nav-toggle {
   #mobile-nav-toggle {
     display: inline;
   }
+}
+
+.img-fluid {
+    max-height: 120px;    
+}
+
+.img-diagrama {
+    min-height: 60vh;
+    margin-bottom: 48px;
 }

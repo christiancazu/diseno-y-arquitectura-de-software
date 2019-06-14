@@ -10,7 +10,7 @@
 
 <div class="container-fluid main-content">
     <div class="row justify-content-center">
-        <div class="col-sm-12 col-lg-8">
+        <div id="main-content" class="col-sm-12 col-lg-8">
             
             <jsp:doBody />
 
