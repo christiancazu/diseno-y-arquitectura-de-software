@@ -1,11 +1,16 @@
 package controladores;
 
+import dataContext.DataContext;
+import entidades.Auto;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import PatronVisitor.AccelerationInCurve;
+import PatronVisitor.AccelerationInPlane;
+import PatronVisitor.AutoAcceleration;
 
 /**
  *
@@ -28,7 +33,7 @@ public class VisitorControlador extends HttpServlet {
         if (request.getPathInfo().equals("/presentacion")) {
             presentacion(request, response);
         } else {
-            
+            demo(request, response);            
         }   
     } 
 
@@ -43,6 +48,37 @@ public class VisitorControlador extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         
+        double FRICTION_FACTOR = 20.15;        
+        double motorHorsePower = 0;        
+        
+        switch(request.getParameter("id")) {
+            case "base":
+                motorHorsePower = 400;
+                break;
+            case "medio":
+                motorHorsePower = 600;
+                break;
+            case "full":
+                motorHorsePower = 800;
+                break;
+        }
+        
+        AutoAcceleration auto = new AutoAcceleration();
+    
+        if (request.getParameter("prueba").equals("plano")) {
+            AccelerationInPlane aip = new AccelerationInPlane(motorHorsePower);
+            request.setAttribute("resultado", auto.accept(aip));
+        } else {
+            AccelerationInCurve aic = new AccelerationInCurve(motorHorsePower, FRICTION_FACTOR);
+            request.setAttribute("resultado", auto.accept(aic));
+        }
+        
+        request.setAttribute("tipo", request.getParameter("id"));
+        request.setAttribute("prueba", request.getParameter("prueba"));
+        request.setAttribute("success", true);
+
+        demo(request, response);
+        
     }
     
     protected void presentacion(HttpServletRequest request, HttpServletResponse response)
@@ -51,4 +87,11 @@ public class VisitorControlador extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/pages/visitorPresentacion.jsp").forward(request, response);
     }
 
+    protected void demo(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        request.setAttribute("autos", DataContext.getDataState());
+
+        request.getRequestDispatcher("/WEB-INF/pages/visitorDemo.jsp").forward(request, response);
+    }
 }

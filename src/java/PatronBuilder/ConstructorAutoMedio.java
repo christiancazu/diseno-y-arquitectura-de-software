@@ -10,6 +10,7 @@ public class ConstructorAutoMedio extends BuilderAuto
     // ------------------------------
     @Override
      public void construirMotor() {
+        this.auto.setTipo("medio");
         this.auto.setMotor( "Motor de potencia media" );
     }
     // ------------------------------

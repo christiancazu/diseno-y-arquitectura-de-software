@@ -11,6 +11,7 @@ public class ConstructorAutoBase extends BuilderAuto
     // ------------------------------
     @Override
      public void construirMotor() {
+        this.auto.setTipo("base");
         this.auto.setMotor( "Motor de potencia mínima" );
     }
     // ------------------------------

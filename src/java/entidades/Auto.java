@@ -5,12 +5,21 @@ package entidades;
  */
 public class Auto
 {
+    private String tipo = "";    
     private String motor = "";
     private String carroceria = "";
     private Boolean ventanillasElectricas = false;
     private Boolean aireAcond = false;
     // -------------------------------------------
     public Auto() {
+    }
+    
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
     // -------------------------------------------
     public String getMotor() {

@@ -12,6 +12,7 @@ public class ConstructorAutoFull extends BuilderAuto {
     // ------------------------------
     @Override
     public void construirMotor() {
+        this.auto.setTipo("full");
         this.auto.setMotor("Motor de potencia alta");
     }
 

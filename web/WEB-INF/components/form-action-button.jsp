@@ -13,7 +13,12 @@
         type="hidden" 
         name="id" 
         value="${param.inputHiddenValue}"
-    >                                
+    > 
+     <input 
+        type="hidden" 
+        name="prueba" 
+        value="${param.inputHiddenValuePrueba}"
+    >
     <button class="btn btn-block btn-${param.btnType} mb-2">
         ${param.btnName}
     </button>
