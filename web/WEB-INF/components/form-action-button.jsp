@@ -3,8 +3,10 @@
     Created on : May 15, 2019, 9:01:13 PM
     Author     : Christian Carrillo Zúñiga
 --%>
-<form 
-    action="${param.formAction}"
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<form     
+    action="<c:url value="${param.formAction}" />"
     method="${param.formMethod}"
 >
     <input 
