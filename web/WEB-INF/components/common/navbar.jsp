@@ -8,13 +8,13 @@
 <%@page import="java.util.Map"%>
 <%@page import="java.util.LinkedHashMap"%>
 
-<%  
+<%
     Map<String, String> links = new LinkedHashMap();
-    
+
     links.put("inicio", request.getContextPath());
-    links.put("foo", "foo");
-    links.put("bar", "bar");
-    
+    //links.put("foo", "foo");
+    //links.put("bar", "bar");
+
     request.setAttribute("links", links);
 %>
 
@@ -39,11 +39,33 @@
                         <a class="nav-link text-capitalize
                            ${param.navbarActiveLink == link.key ? "active" : ""}" 
                            href="${link.value}"
-                        >
-                           ${link.key}
+                           >
+                            ${link.key}
                         </a>
                     </li>
                 </c:forEach>
+
+                <li id="nav-builder" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-builder" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        builder
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown-builder">
+                        <a class="dropdown-item" href="builder/presentacion">Presentación</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="builder/demo">Demo</a>
+                    </div>
+                </li>
+                
+                <li id="nav-visitor" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-visitor" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        visitor
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown-visitor">
+                        <a class="dropdown-item" href="visitor/presentacion">Presentación</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="visitor/presentacion">Demo</a>
+                    </div>
+                </li>
 
             </ul>
         </div>

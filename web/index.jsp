@@ -8,17 +8,25 @@
 
 <t:baseTemplate
     pageTitle="Inicio"
-    navbarBgColor="bg-danger"
+    navbarBgColor="bg-transparent"
     navbarActiveLink="inicio"
+    bgBody="img-body-bg"
     >
     <t:mainContentTemplate>
 
-        <t:mainCardTemplate cardTitle="Inicio"> 
-            
-            #TODO CONTENT
-            
+        <t:mainCardTemplate
+            cardTitle="Patrones de Diseño de Software"
+            cardCustom="card-index col-md-7 offset-md-5"
+            >
+
+            <h5 class="card-title text-center display-4">Builder & Visitor</h5>
+            <h6 class="card-title my-4">Presentado por:</h6>
+            <ul>
+                <li>CCOLLOCCOLLO COAQUIRA EDWIN GEOVANI</li>
+                <li>CARRILLO ZUÑIGA CHRISTIAN</li>
+            </ul>
         </t:mainCardTemplate>
-        
+
     </t:mainContentTemplate>
 
 </t:baseTemplate>
