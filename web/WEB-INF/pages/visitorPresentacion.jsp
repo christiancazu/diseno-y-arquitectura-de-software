@@ -111,36 +111,36 @@ Si un objeto es	el responsable de mantener un cierto tipo de información, entonc
             <!--==========================
               Facts Section
             ============================-->
-            <section id="facts"  class="wow fadeIn">
+            <section id="facts"  class="wow fadeIn" data-wow-delay="0.5s" data-wow-duration="1.4s">
                 <div class="container">
 
-                    <header class="section-header">
+                    <header class="section-header wow fadeInUpBig">
                         <h3>Diagrama de Clases</h3>
                     </header>
 
                     <div class="row counters justify-content-center">                        
 
-                        <div class="col-lg-3 col-6">
+                        <div class="col-lg-3 col-6 wow fadeInDown">
                             <h6 class="text-success text-center"><strong>Cliente</strong></h6>
                             <p>Componente que interactúa con la estructura (element) y con el Visitante, éste es responsable de crear los visitantes y enviarlos al elemento para su procesamiento.</p>
                         </div> 
 
-                        <div class="col-lg-2 col-6">
+                        <div class="col-lg-2 col-6 wow fadeInDown">
                             <h6 class="text-success text-center"><strong>Element</strong></h6>
                             <p>Representa la raíz de la estructura, en forma de árbol, sobre la que utilizaremos el Visitante. Este objeto por lo general es una interface que define el método accept y deberán implementar todos los objetos de la estructura.</p>
                         </div>
 
-                        <div class="col-lg-2 col-6">
+                        <div class="col-lg-2 col-6 wow fadeInDown">
                             <h6 class="text-success text-center"><strong>ConcreteElement</strong></h6>
                             <p>Representa un hijo de la estructura compuesta, la estructura completa puede estar compuesta de un gran número de estos objetos y cada uno deberá implementar el método accept.</p>
                         </div>
 
-                        <div class="col-lg-2 col-6">
+                        <div class="col-lg-2 col-6 wow fadeInDown">
                             <h6 class="text-success text-center"><strong>IVisitor</strong></h6>
                             <p>Interface que define la estructura del visitante, la interface deberá tener un método por cada objeto que se requiera analizar de la estructura (element).</p>
                         </div>
                         
-                        <div class="col-lg-3 col-6">
+                        <div class="col-lg-3 col-6 fadeInDown">
                             <h6 class="text-success text-center"><strong>ConcreteVisitor</strong></h6>
                             <p>Representa una implementación del visitante, esta implementación puede realizar una operación sobre el element. Es posible tener todos los ConcreteVisitor necesarios para realizar las operaciones que necesitemos.</p>
                         </div>
@@ -161,7 +161,7 @@ Si un objeto es	el responsable de mantener un cierto tipo de información, entonc
             <!--==========================
               Clients Section
             ============================-->
-            <section id="testimonials" class="section-bg wow fadeInUp">
+            <section id="testimonials" class="section-bg wow fadeInLeft">
                 <div class="container">                            
                     <header class="section-header">
                         <a class="cta-btn" href="<c:url value="/visitor/demo"/>"><h3>Demo</h3></a>

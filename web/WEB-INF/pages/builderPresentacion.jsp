@@ -115,31 +115,31 @@
             <!--==========================
               Facts Section
             ============================-->
-            <section id="facts"  class="wow fadeIn">
+            <section id="facts"  class="wow fadeIn" data-wow-delay="0.5s" data-wow-duration="1.4s">
                 <div class="container">
 
-                    <header class="section-header">
+                    <header class="section-header wow fadeInUpBig">
                         <h3>Diagrama de Clases</h3>
                     </header>
 
                     <div class="row counters">                        
 
-                        <div class="col-lg-3 col-6">
+                        <div class="col-lg-3 col-6 wow fadeInDown">
                             <h6 class="text-success text-center"><strong>Producto</strong></h6>
                             <p>Representa el objeto complejo a construir.</p>
                         </div> 
 
-                        <div class="col-lg-3 col-6">
+                        <div class="col-lg-3 col-6  wow fadeInDown">
                             <h6 class="text-success text-center"><strong>Builder</strong></h6>
                             <p>Especifica una interface abstracta para la creación de las partes del producto. Declara las operaciones necesarias para crear las partes de un objeto concreto.</p>
                         </div>
 
-                        <div class="col-lg-3 col-6">
+                        <div class="col-lg-3 col-6  wow fadeInDown">
                             <h6 class="text-success text-center"><strong>ConcreteBuilder</strong></h6>
                             <p>Implementa builder y ensambla las partes que constituyen el objeto complejo.</p>
                         </div>
 
-                        <div class="col-lg-3 col-6">
+                        <div class="col-lg-3 col-6  wow fadeInDown">
                             <h6 class="text-success text-center"><strong>Director</strong></h6>
                             <p>Construye un objeto usando la interfaz builder. Sólo debería ser necesario especificar su tipo y así reutilizar el mismo proceso para distintos tipos.</p>
                         </div>
@@ -156,7 +156,7 @@
             <!--==========================
               Clients Section
             ============================-->
-            <section id="testimonials" class="section-bg wow fadeInUp">
+            <section id="testimonials" class="section-bg wow fadeInLeft">
                 <div class="container">
 
                     <header class="section-header">
