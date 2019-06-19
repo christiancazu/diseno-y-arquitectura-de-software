@@ -50,7 +50,6 @@ public class FormActionButton {
 
     public void setBtnName(String btnName) {
         this.btnName = btnName;
-    }
-    
+    }    
     
 }

@@ -85,11 +85,11 @@
                             <div class="card-body">
                                 <h5 class="card-title text-center">Auto ${fab.inputHiddenValue}</h5>                               
                                 <jsp:include page="${component.formActionButton}">
-                                    <jsp:param name="formAction" value="${fab.getFormAction()}" />
-                                    <jsp:param name="formMethod" value="${fab.getFormMethod()}" />
-                                    <jsp:param name="inputHiddenValue" value="${fab.getInputHiddenValue()}" />
-                                    <jsp:param name="btnType" value="${fab.getBtnType()}" />
-                                    <jsp:param name="btnName" value="${fab.getBtnName()}" />
+                                    <jsp:param name="formAction" value="${fab.formAction}" />
+                                    <jsp:param name="formMethod" value="${fab.formMethod}" />
+                                    <jsp:param name="inputHiddenValue" value="${fab.inputHiddenValue}" />
+                                    <jsp:param name="btnType" value="${fab.btnType}" />
+                                    <jsp:param name="btnName" value="${fab.btnName}" />
                                 </jsp:include>
                             </div>
                         </div>

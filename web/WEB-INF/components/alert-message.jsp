@@ -17,7 +17,7 @@
        : "alert-danger"}"
      role="alert"
      >
-    <h6 class="text-center">
+    <h6 class="text-center my-0">
         El ${param.entidad} ${param.isSuccess ? successMessage : failedMessage}
     </h6>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
