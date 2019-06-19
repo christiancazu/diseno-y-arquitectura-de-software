@@ -6,6 +6,6 @@ package PatronVisitor;
  */
 public interface Visitable {
     
-    public double accept(Visitor visitor);
+    public double acceptVisitor(Visitor visitor);
 
 }

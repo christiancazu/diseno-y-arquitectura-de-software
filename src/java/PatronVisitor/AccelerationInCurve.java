@@ -1,5 +1,7 @@
 package PatronVisitor;
 
+import entidades.Auto;
+
 /**
  *
  * @author Christian Carrillo Zúñiga
@@ -7,7 +9,6 @@ package PatronVisitor;
 public class AccelerationInCurve implements Visitor {
 
     private double horsePower;
-    private double ejes = 2;
     private double frictionFactor;
 
     public AccelerationInCurve(double horsePower, double frictionFactor) {
@@ -16,8 +17,8 @@ public class AccelerationInCurve implements Visitor {
     }        
     
     @Override
-    public double visit(AutoAcceleration auto) {
-        return (horsePower / ejes) - frictionFactor;
+    public double visit(Auto auto) {
+        return (auto.getPeso() - horsePower) - frictionFactor;
     }
 
 }

@@ -47,11 +47,11 @@
                 <div class="card shadow my-4 bg-secondary text-light">
                     <div class="row no-gutters">
                         <div class="col-md-4">                           
-                            <img src="<c:url value="/resources/img/auto-${tipo}.jpg" />" class="card-img" alt="...">
+                            <img src="<c:url value="/resources/img/auto-${autoSelected.getTipo()}.jpg" />" class="card-img" alt="...">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body" style="padding: 1.25rem 1.25rem 0">
-                                <h5 class="card-title"><span class="badge badge-light">PRUEBA DE ACELERACIÓN: </span> Auto ${tipo}</h5>
+                                <h5 class="card-title"><span class="badge badge-light">PRUEBA DE ACELERACIÓN: </span> Auto ${autoSelected.getTipo()}</h5>
                                 <p class="card-text">Resultado de la prueba en ${prueba}</p>
                                 <div class="row">
                                     <h4 class="col-sm-12">Aceleración: <span class="badge badge-light">${resultado} Km/h</span></h4>
@@ -64,7 +64,7 @@
             </c:if>           
 
             <%-- card auto --%>
-            <c:forEach var="auto" items="${autos}">
+            <c:forEach var="auto" items="${autos}" varStatus="counter">
                 <div class="card shadow my-4">
                     <div class="row no-gutters">
                         <div class="col-md-4">                           
@@ -87,7 +87,7 @@
                                     <jsp:include page="${component.formActionButton}">
                                         <jsp:param name="formAction" value="/visitor/demo" />
                                         <jsp:param name="formMethod" value="POST" />
-                                        <jsp:param name="inputHiddenValue" value="${auto.getTipo()}" />
+                                        <jsp:param name="inputHiddenValue" value="${counter.index}" />
                                         <jsp:param name="inputHiddenValuePrueba" value="plano" />
                                         <jsp:param name="btnType" value="info" />
                                         <jsp:param name="btnName" value="Plano" />
@@ -95,7 +95,7 @@
                                     <jsp:include page="${component.formActionButton}">
                                         <jsp:param name="formAction" value="/visitor/demo" />
                                         <jsp:param name="formMethod" value="POST" />
-                                        <jsp:param name="inputHiddenValue" value="${auto.getTipo()}" />
+                                        <jsp:param name="inputHiddenValue" value="${counter.index}" />
                                         <jsp:param name="inputHiddenValuePrueba" value="curva" />
                                         <jsp:param name="btnType" value="warning" />
                                         <jsp:param name="btnName" value="Curva" />

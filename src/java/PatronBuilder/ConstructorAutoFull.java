@@ -6,31 +6,34 @@ package PatronBuilder;
  */
 public class ConstructorAutoFull extends BuilderAuto {
 
-    public ConstructorAutoFull() {
-    }
-
-    // ------------------------------
     @Override
-    public void construirMotor() {
+    public void construirTipo() {
         this.auto.setTipo("full");
+    }
+    
+    @Override
+    public void construirMotor() {        
         this.auto.setMotor("Motor de potencia alta");
     }
 
-    // ------------------------------
     @Override
     public void construirCarroceria() {
         this.auto.setCarroceria("Carrocería de alta protección");
     }
 
-    // ------------------------------
     @Override
     public void construirAireAcondicionado() {
         this.auto.setAireAcond(true);
     }
 
-    // ------------------------------
     @Override
     public void construirVentanillas() {
         this.auto.setVentanillasElectricas(true);
     }
+    
+    @Override
+    public void calcularPeso() {
+        this.auto.setPeso(1000);
+    }
+
 }

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import PatronVisitor.AccelerationInCurve;
 import PatronVisitor.AccelerationInPlane;
-import PatronVisitor.AutoAcceleration;
+import PatronVisitor.Visitor;
 
 /**
  *
@@ -49,36 +49,40 @@ public class VisitorControlador extends HttpServlet {
     throws ServletException, IOException {
         
         double FRICTION_FACTOR = 20.15;        
-        double motorHorsePower = 0;        
+        double motorHorsePower = 0;   
         
-        switch(request.getParameter("id")) {
+        int idAuto = Integer.parseInt(request.getParameter("id"));
+
+        Auto autoSelected = DataContext.getDataState().get(idAuto);
+       
+        switch(autoSelected.getTipo()) {
             case "base":
-                motorHorsePower = 400;
+                motorHorsePower = 420;
                 break;
             case "medio":
-                motorHorsePower = 600;
+                motorHorsePower = 640;
                 break;
             case "full":
-                motorHorsePower = 800;
+                motorHorsePower = 780;
                 break;
-        }
-        
-        AutoAcceleration auto = new AutoAcceleration();
+        }           
+
+        Visitor visitor;
     
         if (request.getParameter("prueba").equals("plano")) {
-            AccelerationInPlane aip = new AccelerationInPlane(motorHorsePower);
-            request.setAttribute("resultado", auto.accept(aip));
+            visitor = new AccelerationInPlane(motorHorsePower);
         } else {
-            AccelerationInCurve aic = new AccelerationInCurve(motorHorsePower, FRICTION_FACTOR);
-            request.setAttribute("resultado", auto.accept(aic));
-        }
+            visitor = new AccelerationInCurve(motorHorsePower, FRICTION_FACTOR);
+            
+        }               
+
+        request.setAttribute("resultado", autoSelected.acceptVisitor(visitor));  
         
-        request.setAttribute("tipo", request.getParameter("id"));
+        request.setAttribute("autoSelected", autoSelected);
         request.setAttribute("prueba", request.getParameter("prueba"));
         request.setAttribute("success", true);
 
-        demo(request, response);
-        
+        demo(request, response);        
     }
     
     protected void presentacion(HttpServletRequest request, HttpServletResponse response)
@@ -94,4 +98,5 @@ public class VisitorControlador extends HttpServlet {
 
         request.getRequestDispatcher("/WEB-INF/pages/visitorDemo.jsp").forward(request, response);
     }
+    
 }
