@@ -6,7 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
-import utils.MultipartResolver;
+import utils.FileManager;
 
 /**
  *
@@ -34,7 +34,7 @@ public class EliminarPeliculaAccion extends PeliculaAccion {
             boolean isPeliculaDeleted = iPeliculaDAO.eliminar(id);
 
             if (isPeliculaDeleted) {
-                MultipartResolver.deleteFileInServer(peliculaImageNameToDelete);
+                FileManager.delete(peliculaImageNameToDelete);
                 request.setAttribute("success", true);
             }
         } catch (Exception ex) {
@@ -46,4 +46,5 @@ public class EliminarPeliculaAccion extends PeliculaAccion {
         ListarPeliculasAccion lpa = new ListarPeliculasAccion(request);
         return lpa.ejecutar();
     }
+    
 }

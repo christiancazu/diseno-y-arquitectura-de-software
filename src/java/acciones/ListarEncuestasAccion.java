@@ -36,7 +36,6 @@ public class ListarEncuestasAccion extends EncuestaAccion {
     
     @Override
     public RequestDispatcher ejecutar() {
-        System.out.println("request.getMethod() " + request.getMethod());
         switch (request.getMethod()) {
             case "GET":
             case "POST":

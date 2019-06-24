@@ -5,14 +5,15 @@ import dao.IPeliculaDAO;
 import dao.fabrica.DAOFabrica;
 import entidades.Genero;
 import entidades.Pelicula;
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.commons.fileupload.FileItem;
-import utils.MultipartResolver;
+import javax.servlet.http.Part;
+import utils.FileManager;
 
 /**
  *
@@ -34,7 +35,7 @@ public class RegistrarPeliculaAccion extends PeliculaAccion {
     }
 
     @Override
-    public RequestDispatcher ejecutar() {  
+    public RequestDispatcher ejecutar() {
 
         switch (request.getMethod()) {
             case "GET":
@@ -57,28 +58,42 @@ public class RegistrarPeliculaAccion extends PeliculaAccion {
     }
 
     private void methodPost() {
-
+        request.setAttribute("success", false);
         try {
-            HashMap<String, Object> requestResolved = MultipartResolver.resolveForm(request);
+            // int idPelicula = Integer.parseInt(request.getParameter("id"));
+            String nombrePelicula = request.getParameter("nombre");
+            String descripcionPelicula = request.getParameter("descripcion");
+            int generoPelicula = Integer.parseInt(request.getParameter("genero"));
 
-            Pelicula peliculaResolved = (Pelicula) requestResolved.get("pelicula");
-            FileItem fileResolved = (FileItem) requestResolved.get("file");
+            Part imagenPelicula = request.getPart("imagen");
 
-            if (requestResolved != null) {
-                IPeliculaDAO iPeliculaDAO = subFabrica.getPeliculaDAO();
+            String imagenPeliculaGenerated = FileManager.generateFullFileName(imagenPelicula);
 
-                boolean isPeliculaRegistered = iPeliculaDAO.crear(peliculaResolved);
+            Pelicula pelicula = new Pelicula();
+            pelicula.setNombre(nombrePelicula);
+            pelicula.setDescripcion(descripcionPelicula);
+            pelicula.setGenero(new Genero(generoPelicula));
+            pelicula.setImagen(imagenPeliculaGenerated);
 
-                if (isPeliculaRegistered && fileResolved != null) {
-                    MultipartResolver.saveFileInServer(fileResolved, peliculaResolved.getImagen());
-                }
+            IPeliculaDAO iPeliculaDAO = subFabrica.getPeliculaDAO();
+
+            boolean isPeliculaRegistered = iPeliculaDAO.crear(pelicula);
+
+            if (isPeliculaRegistered) {
+                FileManager.save(imagenPelicula, imagenPeliculaGenerated);
                 request.setAttribute("success", true);
-            }            
-        } catch (Exception ex) {
-            request.setAttribute("success", false);
+            }
+        } catch (IOException ex) {
             Logger.getLogger(RegistrarPeliculaAccion.class.getName()).log(Level.SEVERE, null, ex);
-        }  
-        // recall methodGet to set context to page again
-        methodGet();
+        } catch (ServletException ex) {
+            Logger.getLogger(RegistrarPeliculaAccion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(RegistrarPeliculaAccion.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            // recall methodGet to set context to page again
+            methodGet();
+        }
+        
     }
+    
 }

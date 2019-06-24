@@ -3,14 +3,17 @@ package acciones;
 import dao.IGeneroDAO;
 import dao.IPeliculaDAO;
 import dao.fabrica.DAOFabrica;
+import entidades.Genero;
 import entidades.Pelicula;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.commons.fileupload.FileItem;
-import utils.MultipartResolver;
+import javax.servlet.http.Part;
+import utils.FileManager;
 
 /**
  *
@@ -34,7 +37,7 @@ public class ActualizarPeliculaAccion extends PeliculaAccion {
     }
 
     @Override
-    public RequestDispatcher ejecutar() {        
+    public RequestDispatcher ejecutar() {
         switch (request.getMethod()) {
             case "GET":
                 methodGet();
@@ -59,32 +62,46 @@ public class ActualizarPeliculaAccion extends PeliculaAccion {
 
     private void methodPost() {
         try {
-            HashMap<String, Object> requestResolved = MultipartResolver.resolveForm(request);
+            int idPelicula = Integer.parseInt(request.getParameter("id"));
+            String nombrePelicula = request.getParameter("nombre");
+            String descripcionPelicula = request.getParameter("descripcion");
+            int generoPelicula = Integer.parseInt(request.getParameter("genero"));
 
-            Pelicula peliculaResolved = (Pelicula) requestResolved.get("pelicula");
-            FileItem fileResolved = (FileItem) requestResolved.get("file");
-            
-            // keeping the Pelicula to delete to get his Image String PATH that will be deleted in server
-            Pelicula peliculaToDelete = iPeliculaDAO.getById(peliculaResolved.getId());
-            
-            if (requestResolved != null) {
-                boolean isPeliculaRegistered = iPeliculaDAO.actualizar(peliculaResolved);
+            Part imagenPelicula = request.getPart("imagen");
 
-                if (isPeliculaRegistered && fileResolved != null) {      
-                    MultipartResolver.saveFileInServer(fileResolved, peliculaResolved.getImagen());
-                    MultipartResolver.deleteFileInServer(peliculaToDelete.getImagen());
+            Pelicula pelicula = new Pelicula(idPelicula);
+            pelicula.setNombre(nombrePelicula);
+            pelicula.setDescripcion(descripcionPelicula);
+            pelicula.setGenero(new Genero(generoPelicula));
 
-                    // forcing the delay to complete the load on the server to be rendered properly
-                    makeDelay(2000);
-                }
-                request.setAttribute("success", true);
-                setContextToRequest(iPeliculaDAO.getById(peliculaResolved.getId()));
+            // if imagenPelicula exists in request
+            if (!imagenPelicula.getSubmittedFileName().isEmpty()) {
+                String imagenPeliculaGenerated = FileManager.generateFullFileName(imagenPelicula);
+                pelicula.setImagen(imagenPeliculaGenerated);
             }
+            IPeliculaDAO iPeliculaDAO = subFabrica.getPeliculaDAO();
+
+            // keeping Pelicula image name that will deleted in server
+            String peliculaImageNameToDelete = iPeliculaDAO.getById(pelicula.getId()).getImagen();
+
+            boolean isPeliculaUpdated = iPeliculaDAO.actualizar(pelicula);
+
+            // if Pelicula was updated in DB & exists in request 
+            if (isPeliculaUpdated && !imagenPelicula.getSubmittedFileName().isEmpty()) {
+                FileManager.delete(peliculaImageNameToDelete);
+                FileManager.save(imagenPelicula, pelicula.getImagen());
+
+                // forcing the delay to complete the load on the server to be rendered properly
+                makeDelay(2000);
+            }
+            request.setAttribute("success", true);
         } catch (Exception ex) {
             request.setAttribute("success", false);
-            Logger.getLogger(ActualizarPeliculaAccion.class.getName()).log(Level.SEVERE, null, ex);
-        }      
-        // #TODO: error handling when Pelicula is not saved(priority low)
+            Logger.getLogger(RegistrarPeliculaAccion.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            // recall methodGet to set context to page again
+            methodGet();
+        }
     }
 
     /**
@@ -96,7 +113,6 @@ public class ActualizarPeliculaAccion extends PeliculaAccion {
      * @throws Exception
      */
     private void setContextToRequest(Pelicula pelicula) throws Exception {
-        
         request.setAttribute("pelicula", pelicula);
         request.setAttribute("generos", iGeneroDAO.getAll());
     }
@@ -110,4 +126,5 @@ public class ActualizarPeliculaAccion extends PeliculaAccion {
     private void makeDelay(int delayTime) throws InterruptedException {
         Thread.sleep(delayTime);
     }
+
 }
