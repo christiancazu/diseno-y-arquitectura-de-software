@@ -61,7 +61,7 @@
                     scope="request"
                     >                     
                     <jsp:include page="${component.alertMessage}">
-                        <jsp:param name="isSuccess" value="true" />
+                        <jsp:param name="isSuccess" value="${success}" />
                         <jsp:param name="entidad" value="pelicula" />
                         <jsp:param name="accion" value="actualizada" />
                     </jsp:include>
