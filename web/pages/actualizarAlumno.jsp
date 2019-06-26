@@ -57,7 +57,7 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Actualizar alumno: Nº ${alumno.id}</h5>
-                    <form action="actualizarAlumno" method="POST">
+                    <form action="alumnos/actualizar" method="POST">
                         
                         <input type="hidden" name="id" value="${alumno.id}">
                         
@@ -107,6 +107,8 @@
 
 <script>
     $(document).ready(function() { 
+        fixURL()
+        
         let success = "<%= request.getAttribute("success")%>"
         if (success !== "null") {
             $alert = $('#alert')
@@ -123,5 +125,14 @@
                     ? "El alumno ha sido actualizado satisfactoriamente."
                     : "El alumno no ha podido ser actualizado.")
         }
-    });
+    })
+    
+    function fixURL() {
+        pathNameFixed = location.pathname.replace(/\/alumnos\/alumnos/, '/alumnos')
+
+        if (!window.location.search) {
+            baseUrl = [location.protocol, '//', location.host, pathNameFixed].join('')
+            window.history.replaceState({}, "", baseUrl + "?id=" + ${alumno.id})
+        }        
+    }
 </script>
