@@ -21,7 +21,7 @@ public abstract class AlumnoAccion {
                 // managing get & post pathInfo cases
                 case "/alumnos/registrar":
                 case "/registrar":
-                    //return new RegistrarAlumnoAccion(request);
+                    return new RegistrarAlumnoAccion(request);
                 case "/alumnos/actualizar":
                 case "/actualizar":
                     //return new ActualizarAlumnoAccion(request);

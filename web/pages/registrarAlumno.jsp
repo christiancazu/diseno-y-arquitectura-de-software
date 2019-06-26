@@ -53,7 +53,7 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Registrar alumno</h5>
-                    <form action="registrarAlumno" method="POST">                       
+                    <form action="alumnos/registrar" method="POST">                       
 
                         <%-- formGroups --%>
                         <c:forEach var="formGroup" items="${formGroups}">
