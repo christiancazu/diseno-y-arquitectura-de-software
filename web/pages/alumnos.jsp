@@ -85,12 +85,12 @@
                         
                         <%-- button Registrar --%>
                         <a class="btn btn-block btn-md btn-outline-primary mt-2" 
-                            href="registrarAlumno"
+                            href="alumnos/registrar"
                         >
                             Registrar
                         </a>
-
-                    </form>                    
+                        
+                    </form>  
                 </div>
             </div>
         </div>
@@ -118,9 +118,9 @@
                         // context for formActionButtons components
                         List<FormActionButton> formActionButtons = new ArrayList();
                         formActionButtons.add(new FormActionButton(
-                                "actualizarAlumno", "GET", "", "success", "Actualizar"));
+                                "alumnos/actualizar", "GET", "", "success", "Actualizar"));
                         formActionButtons.add(new FormActionButton(
-                                "eliminarAlumno", "POST", "", "danger", "Eliminar"));
+                                "alumnos/eliminar", "POST", "", "danger", "Eliminar"));
 
                         // setting formActionButtons attribute as pageContext
                         request.setAttribute("formActionButtons", formActionButtons);
