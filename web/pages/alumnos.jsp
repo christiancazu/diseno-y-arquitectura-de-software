@@ -230,6 +230,8 @@
     function fixURL() {
         pathNameFixed = location.pathname.replace(/\/alumnos\/eliminar/, '/alumnos')
                 
+        console.warn(!!window.location.search)
+                
         if (!window.location.search) {
             baseUrl = [location.protocol, '//', location.host, pathNameFixed].join('')
             window.history.replaceState({}, "", baseUrl)

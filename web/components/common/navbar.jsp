@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link ${param.alumnosActiveLink}" href="alumnos">
+                    <a class="nav-link ${param.alumnosActiveLink}" href="<%= request.getContextPath()%>/alumnos">
                         Alumnos
                     </a>
                 </li>
