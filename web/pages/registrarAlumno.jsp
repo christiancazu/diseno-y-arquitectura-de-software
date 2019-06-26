@@ -76,7 +76,7 @@
 
                         <%-- button Volver --%>
                         <jsp:include page="${component.buttonBack}">
-                            <jsp:param name="path" value="/alumnos" />
+                            <jsp:param name="path" value="alumnos" />
                         </jsp:include>    
 
                     </form>                    
@@ -101,6 +101,8 @@
 
 <script>
     $(document).ready(function() { 
+        fixUrl()
+        
         let success = "<%= request.getAttribute("success")%>"
         console.log(success)
         if (success !== "null") {
@@ -118,5 +120,14 @@
                     ? "El alumno ha sido registrado satisfactoriamente."
                     : "El alumno no ha podido ser registrado.")
         }
-    });
+    })
+    
+    function fixUrl() {
+        pathNameFixed = location.pathname.replace(/\/alumnos\/alumnos/, '/alumnos')
+
+        if (!window.location.search) {
+            baseUrl = [location.protocol, '//', location.host, pathNameFixed].join('')
+            window.history.replaceState({}, "", baseUrl)
+        } 
+    }
 </script>

@@ -26,7 +26,7 @@ public abstract class AlumnoAccion {
                 case "/actualizar":
                     //return new ActualizarAlumnoAccion(request);
                 case "/eliminar":
-                    //return new EliminarAlumnoAccion(request);
+                    return new EliminarAlumnoAccion(request);
             }
         }
         return null;

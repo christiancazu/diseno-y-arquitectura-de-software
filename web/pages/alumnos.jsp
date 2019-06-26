@@ -171,8 +171,10 @@
 
 <jsp:include page='../components/common/foot.jsp'/>
 
-<script>
+<script>   
     $(document).ready(() => {
+        fixURL()
+        
         $('#text-filtro').removeAttr('required')
 
         let filtro = "<%= request.getAttribute("filtro")%>"
@@ -223,6 +225,15 @@
             name: 'filtro',
             value: $('input[name="filtro"]:checked').val()         
         }).appendTo(form);
+    }
+    
+    function fixURL() {
+        pathNameFixed = location.pathname.replace(/\/alumnos\/eliminar/, '/alumnos')
+                
+        if (!window.location.search) {
+            baseUrl = [location.protocol, '//', location.host, pathNameFixed].join('')
+            window.history.replaceState({}, "", baseUrl)
+        }        
     }
     
 </script>
