@@ -13,6 +13,10 @@ public class CategoriaService implements ICategoriaService {
     
     private CategoriaDAO categoriaDAO;
 
+    public CategoriaService() {
+        this.categoriaDAO = new CategoriaDAO();
+    }
+
     @Override
     public List<Categoria> findAll() {
         return categoriaDAO.findAll();
